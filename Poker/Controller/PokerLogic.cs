@@ -6,7 +6,7 @@ namespace Poker.Controller
 {
     class PokerLogic
     {
-        //public int[] WinningHands = new int[10];
+        public List<List<Card>> WinningHands = GenerateWinningHands();
         public static void Setup()
         {
             //standard deck of 52
@@ -27,10 +27,16 @@ namespace Poker.Controller
             //two pair - 4 cards, two 2 pair that are matched with a 5th card (J-J-3-3-9)
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
-            generateDeck();
+            GenerateDeck();
+            GenerateWinningHands();
         }
 
-        private static void generateDeck()
+        private static List<List<Card>> GenerateWinningHands()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GenerateDeck()
         {
             throw new NotImplementedException();
         }
