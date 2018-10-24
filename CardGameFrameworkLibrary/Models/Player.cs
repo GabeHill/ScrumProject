@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace CardGameFrameworkLibrary.Models
 {
-    class Player
+    public class Player
     {
-        public Hand Hand { get; set; }
+        public Hand PlayerHand { get; set; }
         public int Bank { get; set; }
         public string Name { get; set; }
+
     }
 }
