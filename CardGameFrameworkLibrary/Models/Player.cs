@@ -8,9 +8,19 @@ namespace CardGameFrameworkLibrary.Models
 {
     public class Player
     {
-        public Hand PlayerHand { get; set; }
         public int Bank { get; set; }
         public string Name { get; set; }
+        public List<Card> CardsInHand { get; set; }
+        public bool HasFolded { get; set; }
+        public bool HasBust { get; set; }
+        public int HandValue { get; set; }
 
+        public void GetHandValue()
+        {
+            foreach (var card in CardsInHand)
+            {
+                HandValue += card.Value;
+            }
+        }
     }
 }

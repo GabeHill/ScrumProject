@@ -11,14 +11,22 @@ namespace BlackJackLib
     {
         List<Player> players;
 
-        private void CheckWinner()
+        private void GetContenders()
         {
             List<Player> contenders = new List<Player>();
 
             foreach (var player in players)
             {
-                
+                if (!player.HasFolded)
+                {
+                    contenders.Add(player);
+                }
             }
+        }
+
+        private void CheckHighest(List<Player> players)
+        {
+            foreach
         }
     }
 }
