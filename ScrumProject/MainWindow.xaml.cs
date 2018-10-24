@@ -24,5 +24,33 @@ namespace ScrumProject
         {
             InitializeComponent();
         }
+
+        private void btnPoker_Click(object sender, RoutedEventArgs e)
+        {
+            //Name this whatever the poker window is called
+            //PokerWindow poker = new PokerWindow();
+            //poker.Show();
+            Close();
+        }
+
+        private void btnBlackjack_Click(object sender, RoutedEventArgs e)
+        {
+            //Name this whatever the blackjack window is called
+            //BlackjackWindow blackjack = new BlackjackWindow();
+            //blackjack.Show();
+            Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblGame.Height = lblGame.Width;
+            tblGame.Height = tblGame.Width;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            lblGame.Height = lblGame.Width;
+            tblGame.Height = tblGame.Width;
+        }
     }
 }
