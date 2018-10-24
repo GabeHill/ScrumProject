@@ -22,11 +22,37 @@ namespace BlackJackLib
                     contenders.Add(player);
                 }
             }
+            CheckHighest(contenders);
         }
 
         private void CheckHighest(List<Player> players)
         {
-            foreach
+            Dictionary<Player, int> pairs = new Dictionary<Player, int>();
+            int low = 2;
+            bool HasWinner = false;
+            while (!HasWinner)
+            {
+                if (players.Count > 1)
+                {
+                    foreach (var player in players)
+                    {
+                        if (players.Count > 1)
+                        {
+                            if (player.HandValue < low)
+                            {
+
+                                players.Remove(player);
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    HasWinner = true;
+                }
+                low++;
+            }
         }
     }
 }
