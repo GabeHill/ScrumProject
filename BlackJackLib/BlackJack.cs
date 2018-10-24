@@ -9,13 +9,19 @@ namespace BlackJackLib
 {
     public class BlackJack
     {
-        List<Player> players;
+        //List of all  players Including House
+        public List<Player> Allplayers { get; set; }
+        //Current Deck
+        public Deck Deck { get; set; }
+        //Amount of somone could win
+        public int Pool { get; set; }
 
-        private void GetContenders()
+        //Gets All the players that have no busted
+        private void GetWinners()
         {
             List<Player> contenders = new List<Player>();
 
-            foreach (var player in players)
+            foreach (var player in Allplayers)
             {
                 if (!player.HasFolded)
                 {
@@ -24,34 +30,51 @@ namespace BlackJackLib
             }
             CheckHighest(contenders);
         }
-
+        //Grab all the players who 
         private void CheckHighest(List<Player> players)
         {
-            Dictionary<Player, int> pairs = new Dictionary<Player, int>();
             int low = 2;
             bool HasWinner = false;
             while (!HasWinner)
             {
                 if (players.Count > 1)
                 {
-                    foreach (var player in players)
-                    {
-                        if (players.Count > 1)
-                        {
-                            if (player.HandValue < low)
-                            {
-
-                                players.Remove(player);
-                                break;
-                            }
-                        }
-                    }
+                    Remove(low, players);
                 }
                 else
                 {
                     HasWinner = true;
                 }
                 low++;
+            }
+        }
+
+        //Removes player if lower than the low
+        public void Remove(int low,List<Player> players)
+        {
+            foreach (var player in players)
+            {
+                if (players.Count > 1)
+                {
+                    if (player.HandValue < low)
+                    {
+                        players.Remove(player);
+                        break;
+                    }
+                }
+            }
+        }
+
+        //Does a player have less than five Cards in Hand
+        public bool CanDraw(Player player)
+        {
+            if (player.CardsInHand.Count <= 4)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
