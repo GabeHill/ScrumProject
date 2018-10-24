@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CardGameFrameworkLibrary\CardGameFrameworkLibrary.csproj">
+      <Project>{4dcf7ef0-ae5f-4f66-8025-d878dec76afa}</Project>
+      <Name>CardGameFrameworkLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
