@@ -14,6 +14,23 @@ namespace CardGameFrameworkLibrary.Models
         DIAMOND
     }
 
+    public enum Rank
+    {
+        TWO,
+        THREE,
+        FOUR,
+        FIVE,
+        SIX,
+        SEVEN,
+        EIGHT,
+        NINE,
+        TEN,
+        JOKER,
+        QUEEN,
+        KING,
+        ACE
+    }
+
     public class Card
     {
         public Suit Suit { get; set; }

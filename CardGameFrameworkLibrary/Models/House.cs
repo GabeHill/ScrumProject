@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGameFrameworkLibrary.Models
 {
-    class House : Player
+    public class House : Player
     {
     }
 }
