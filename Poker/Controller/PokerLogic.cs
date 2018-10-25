@@ -1,13 +1,15 @@
-﻿using System;
+﻿using CardGameFrameworkLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Poker.Controller
 {
-    class PokerLogic
+    public class PokerLogic
     {
-        public List<List<Card>> WinningHands = GenerateWinningHands();
-        public static void Setup()
+        //public List<List<Card>> WinningHands = GenerateWinningHands();
+        //public List<Card> Deck = 
+        public void Setup()
         {
             //standard deck of 52
             //(from high to low) Ace, King, Queen, Jack, 10, 9, 8, 7, 6, 5, 4, 3, 2, Ace
@@ -28,17 +30,30 @@ namespace Poker.Controller
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
             GenerateDeck();
-            GenerateWinningHands();
+            //GenerateWinningHands();
         }
 
-        private static List<List<Card>> GenerateWinningHands()
-        {
-            throw new NotImplementedException();
-        }
+        //private static List<List<Card>> GenerateWinningHands()
+        //{
+        //    //throw new NotImplementedException();
+        //}
 
         private static void GenerateDeck()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < 51; i++)
+            {
+                for (int j = 0; j < 12; j++)
+                {
+
+                    Card card = new Card()
+                    {
+                        Suit = Suit.CLUB,
+                        
+                        
+                    };
+
+                }
+            }
         }
     }
 }
