@@ -8,7 +8,9 @@ namespace Poker.Controller
     public class PokerLogic
     {
         //public List<List<Card>> WinningHands = GenerateWinningHands();
-        //public List<Card> Deck = 
+
+        //Deck to be used (or passed around in code) in game
+        public static List<Card> Deck;
         public void Setup()
         {
             //standard deck of 52
@@ -40,25 +42,41 @@ namespace Poker.Controller
 
         private static void GenerateDeck()
         {
-            //need code to use to iterate of enum
-            int[] values;
-            if (true)
+
+            //These two lists hold respective enum values to later easily iterate over in loop
+            List<Suit> suitList = new List<Suit>();
+            List<Rank> rankList = new List<Rank>();
+
+            //sets each list values
+            foreach (Suit suit in (Suit[])Enum.GetValues(typeof(Suit)))
+                {
+                suitList.Add(suit);
+                }
+            foreach (Rank rank in (Rank[])Enum.GetValues(typeof(Rank)))
             {
-                Card temp = new Card();
-                values = (int[])Enum.GetValues(typeof(Card));
+                rankList.Add(rank);
             }
-            for (int i = 0; i < 51; i++)
+
+            //1st loop
+                //iterate 4 times (4(suits)*13(ranks) == 52(cards))
+            //2nd loop
+                //creates an instance of card 13 times
+            for (int i = 0; i < 3; i++)
             {
+                //
+                int color = 0;
                 for (int j = 0; j < 12; j++)
                 {
 
                     Card card = new Card()
                     {
-                        Suit = Suit.CLUB,
+                        Suit = suitList[color],
+                        Rank = rankList[j],
                         
                         
                     };
-
+                    Deck.Add(card);
+                    color++;
                 }
             }
         }
