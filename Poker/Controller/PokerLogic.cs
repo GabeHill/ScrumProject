@@ -34,9 +34,43 @@ namespace Poker.Controller
             //two pair - 4 cards, two 2 pair that are matched with a 5th card (J-J-3-3-9)
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
-            deck.Cards = GenerateDeck();            
+            deck.Cards = GenerateDeck();
+            foreach (var card in deck.Cards)
+            {
+                if (card.ImageSource==null||card.ImageSource=="")
+                {
+                    Console.WriteLine($"{card.Suit}{card.Value}'s image source is null or empty");
+                }
+                else
+                {
+                Console.WriteLine(card.ImageSource);
+                }
+            }
+            ShuffleDeck(deck.Cards);
             players = GeneratePlayers();
+
             //GenerateWinningHands();
+        }
+
+        private List<Card> ShuffleDeck(List<Card> deck)
+        {
+            Random random = new Random();
+            int movingIndex;
+            int replacedIndex;
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < deck.Count; j++)
+                {
+                    movingIndex = random.Next(deck.Count);
+                    replacedIndex = random.Next(deck.Count);
+                    Card tempCard = deck[replacedIndex];
+                    deck[replacedIndex] = deck[movingIndex];
+                    deck[movingIndex] = tempCard;
+                }
+
+            }
+            Console.WriteLine();
+            return deck;
         }
 
         private List<Player> GeneratePlayers()
@@ -116,7 +150,7 @@ namespace Poker.Controller
                     };
 
                     //setting this temp variable to the suitX to match filenames in resource folder
-                    cardName = $"{suitList[color].ToString()}{(j + 2)}";
+                    cardName = $"{suitList[color].ToString()}{(card.Value)}";
                     foreach (var fileName in fileNames)
                     {
                         if ((fileName).ToLower().Contains((cardName).ToLower()))
