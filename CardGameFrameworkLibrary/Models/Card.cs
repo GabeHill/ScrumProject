@@ -35,7 +35,7 @@ namespace CardGameFrameworkLibrary.Models
     {
         public Suit Suit { get; set; }
         public int Value { get; set; }
-        public int Rank { get; set; }
+        public Rank Rank { get; set; }
         public string ImageSource { get; set; }
 
     }
