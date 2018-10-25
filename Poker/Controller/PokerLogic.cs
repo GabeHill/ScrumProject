@@ -10,7 +10,7 @@ namespace Poker.Controller
         //public List<List<Card>> WinningHands = GenerateWinningHands();
 
         //Deck to be used (or passed around in code) in game
-        public static List<Card> Deck;
+        public static List<Card> Deck = GenerateDeck();
         public void Setup()
         {
             //standard deck of 52
@@ -40,45 +40,47 @@ namespace Poker.Controller
         //    //throw new NotImplementedException();
         //}
 
-        private static void GenerateDeck()
+        private static List<Card> GenerateDeck()
         {
-
+            List<Card> newDeck = new List<Card>();
             //These two lists hold respective enum values to later easily iterate over in loop
             List<Suit> suitList = new List<Suit>();
             List<Rank> rankList = new List<Rank>();
 
             //sets each list values
             foreach (Suit suit in (Suit[])Enum.GetValues(typeof(Suit)))
-                {
+            {
                 suitList.Add(suit);
-                }
+            }
             foreach (Rank rank in (Rank[])Enum.GetValues(typeof(Rank)))
             {
                 rankList.Add(rank);
             }
 
             //1st loop
-                //iterate 4 times (4(suits)*13(ranks) == 52(cards))
+            //iterate 4 times (4(suits)*13(ranks) == 52(cards))
             //2nd loop
-                //creates an instance of card 13 times
-            for (int i = 0; i < 3; i++)
+            //creates an instance of card 13 times
+            int color = 0;
+            for (int i = 0; i < 4; i++)
             {
                 //
-                int color = 0;
-                for (int j = 0; j < 12; j++)
+                for (int j = 0; j < 13; j++)
                 {
 
                     Card card = new Card()
                     {
                         Suit = suitList[color],
                         Rank = rankList[j],
-                        
-                        
+                        Value = (j + 2)
+
+
                     };
-                    Deck.Add(card);
-                    color++;
+                    newDeck.Add(card);
                 }
+                color++;
             }
+            return newDeck;
         }
     }
 }
