@@ -25,7 +25,7 @@ namespace CardGameFrameworkLibrary.Models
         EIGHT,
         NINE,
         TEN,
-        JOKER,
+        JACK,
         QUEEN,
         KING,
         ACE
