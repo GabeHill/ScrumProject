@@ -23,44 +23,36 @@ namespace BlackJackLib
 
             foreach (var player in Allplayers)
             {
-                if (!player.HasFolded)
+                if (!player.HasBust)
                 {
                     contenders.Add(player);
                 }
             }
             CheckHighest(contenders);
         }
-        //Grab all the players who 
-        private void CheckHighest(List<Player> players)
+        //Grabs the highest hand value of all players
+        private int GetHighestNumber(List<Player> players)
         {
-            int low = 2;
-            bool HasWinner = false;
-            while (!HasWinner)
-            {
-                if (players.Count > 1)
-                {
-                    Remove(low, players);
-                }
-                else
-                {
-                    HasWinner = true;
-                }
-                low++;
-            }
-        }
-
-        //Removes player if lower than the low
-        public void Remove(int low,List<Player> players)
-        {
+            int high = 1;
             foreach (var player in players)
             {
-                if (players.Count > 1)
+                if (player.HandValue > high)
                 {
-                    if (player.HandValue < low)
-                    {
-                        players.Remove(player);
-                        break;
-                    }
+                    high = player.HandValue;
+                }
+            }
+            return high;
+        }
+        //Remove all players who have a lower hand value than a given int
+        private void CheckHighest(List<Player> players)
+        {
+            int high = GetHighestNumber(players);
+            foreach (var player in players)
+            {
+                if (player.HandValue < high)
+                {
+                    players.Remove(player);
+                    break;
                 }
             }
         }
