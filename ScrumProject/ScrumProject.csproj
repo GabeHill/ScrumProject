@@ -95,18 +95,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ProjectReference Include="..\CardGameFrameworkLibrary\CardGameFrameworkLibrary.csproj">
       <Project>{4dcf7ef0-ae5f-4f66-8025-d878dec76afa}</Project>
       <Name>CardGameFrameworkLibrary</Name>
     </ProjectReference>
-=======
     <Resource Include="Images\backgroundcasino.jpg" />
-    <Resource Include="Images\backgroundgreen.jpg" />
     <Resource Include="Images\betterpokerhand.jpg" />
     <Resource Include="Images\blackjack.jpg" />
-    <Resource Include="Images\pokerhand.jpg" />
->>>>>>> MainMenu
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
