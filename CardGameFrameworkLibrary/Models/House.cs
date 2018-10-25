@@ -8,5 +8,13 @@ namespace CardGameFrameworkLibrary.Models
 {
     public class House : Player
     {
+        public bool HasToDraw()
+        {
+            if (HandValue < 17)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
