@@ -40,6 +40,13 @@ namespace Poker.Controller
 
         private static void GenerateDeck()
         {
+            //need code to use to iterate of enum
+            int[] values;
+            if (true)
+            {
+                Card temp = new Card();
+                values = (int[])Enum.GetValues(typeof(Card));
+            }
             for (int i = 0; i < 51; i++)
             {
                 for (int j = 0; j < 12; j++)
