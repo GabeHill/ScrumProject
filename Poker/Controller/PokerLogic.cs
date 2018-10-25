@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Poker.Controller
 {
@@ -10,7 +11,7 @@ namespace Poker.Controller
         //public List<List<Card>> WinningHands = GenerateWinningHands();
 
         //Deck to be used (or passed around in code) in game
-        public static List<Card> Deck = GenerateDeck();
+        public static List<Card> Deck = new List<Card>();
         public void Setup()
         {
             //standard deck of 52
@@ -31,7 +32,8 @@ namespace Poker.Controller
             //two pair - 4 cards, two 2 pair that are matched with a 5th card (J-J-3-3-9)
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
-            GenerateDeck();
+            Deck = GenerateDeck();            
+            //GetFiles("~/CardGameFrameworkLibrary/Resource");
             //GenerateWinningHands();
         }
 
@@ -42,7 +44,18 @@ namespace Poker.Controller
 
         private static List<Card> GenerateDeck()
         {
+            //next few lines of code setup variables to get images
+            string resourcePath = "../../../CardGameFrameworkLibrary/Resource/";
+            string[] cardImagePath = Directory.GetFiles(resourcePath);
+            List<string> fileNames = new List<string>();
+            foreach (string file in cardImagePath)
+            {
+                fileNames.Add(Path.GetFileName(file));
+
+            }
+
             List<Card> newDeck = new List<Card>();
+
             //These two lists hold respective enum values to later easily iterate over in loop
             List<Suit> suitList = new List<Suit>();
             List<Rank> rankList = new List<Rank>();
@@ -67,15 +80,27 @@ namespace Poker.Controller
                 //
                 for (int j = 0; j < 13; j++)
                 {
-
+                    string cardName = "";
                     Card card = new Card()
                     {
                         Suit = suitList[color],
                         Rank = rankList[j],
                         Value = (j + 2)
 
-
                     };
+
+                    //setting this temp variable to the suitX to match filenames in resource folder
+                    cardName = $"{suitList[color].ToString()}{(j + 2)}";
+                    foreach (var fileName in fileNames)
+                    {
+                        if ((fileName).ToLower().Contains((cardName).ToLower()))
+                        {
+                            card.ImageSource = resourcePath + fileName;
+                            //Console.WriteLine(fileName);
+                            break;
+                        }
+                    }
+                    //card.ImageSource =
                     newDeck.Add(card);
                 }
                 color++;
