@@ -11,4 +11,10 @@
     <ProjectReference Include="..\CardGameFrameworkLibrary\CardGameFrameworkLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="DCorum_CIO">
+      <HintPath>..\..\ConsoleIOTest\ConsoleIOTest\bin\Debug\DCorum_CIO.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

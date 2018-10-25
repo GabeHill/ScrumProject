@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using CSC160_ConsoleMenu;
 
 namespace Poker.Controller
 {
@@ -11,7 +12,8 @@ namespace Poker.Controller
         //public List<List<Card>> WinningHands = GenerateWinningHands();
 
         //Deck to be used (or passed around in code) in game
-        public static List<Card> Deck = new List<Card>();
+        public static Deck deck = new Deck();
+        public static List<Player> players = new List<Player>();
         public void Setup()
         {
             //standard deck of 52
@@ -32,9 +34,33 @@ namespace Poker.Controller
             //two pair - 4 cards, two 2 pair that are matched with a 5th card (J-J-3-3-9)
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
-            Deck = GenerateDeck();            
-            //GetFiles("~/CardGameFrameworkLibrary/Resource");
+            deck.Cards = GenerateDeck();            
+            players = GeneratePlayers();
             //GenerateWinningHands();
+        }
+
+        private List<Player> GeneratePlayers()
+        {
+            List<Player> results = new List<Player>();
+            int playerNum = CIO.PromptForInt("How many players are there?",2,5);
+            for (int i = 0; i < playerNum; i++)
+            {
+                //Console.WriteLine(i);
+                Player player = new Player()
+                {
+                    Bank = 500,
+                    CardsInHand = null,
+                    HandValue = 0,
+                    HasBust = false,
+                    HasFolded = false,
+                    Name = CIO.PromptForInput("What is your name?",true),
+                };
+                if (player.Name == null || player.Name == "")
+                {
+                    player.Name = $"Player{i+1}";
+                }
+            }
+            return results;
         }
 
         //private static List<List<Card>> GenerateWinningHands()
