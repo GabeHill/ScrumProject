@@ -35,18 +35,10 @@ namespace Poker.Controller
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
             deck.Cards = GenerateDeck();
-            foreach (var card in deck.Cards)
+            for (int i = 0; i < 7; i++)
             {
-                if (card.ImageSource==null||card.ImageSource=="")
-                {
-                    Console.WriteLine($"{card.Suit}{card.Value}'s image source is null or empty");
-                }
-                else
-                {
-                Console.WriteLine(card.ImageSource);
-                }
+            ShuffleDeck(deck.Cards); 
             }
-            ShuffleDeck(deck.Cards);
             players = GeneratePlayers();
 
             //GenerateWinningHands();
@@ -87,12 +79,13 @@ namespace Poker.Controller
                     HandValue = 0,
                     HasBust = false,
                     HasFolded = false,
-                    Name = CIO.PromptForInput("What is your name?",true),
+                    Name = CIO.PromptForInput($"Player{i+1}, what is your name?",true),
                 };
                 if (player.Name == null || player.Name == "")
                 {
                     player.Name = $"Player{i+1}";
                 }
+                results.Add(player);
             }
             return results;
         }
