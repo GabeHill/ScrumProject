@@ -150,10 +150,10 @@ namespace Poker.Controller
                     };
 
                     //setting this temp variable to the suitX to match filenames in resource folder
-                    cardName = $"{suitList[color].ToString()}{(card.Value)}";
+                    cardName = $"{card.Suit}{card.Rank}";
                     foreach (var fileName in fileNames)
                     {
-                        if ((fileName).ToLower().Contains((cardName).ToLower()))
+                        if (fileName.Contains(cardName))
                         {
                             card.ImageSource = resourcePath + fileName;
                             //Console.WriteLine(fileName);
