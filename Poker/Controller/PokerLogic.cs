@@ -35,13 +35,36 @@ namespace Poker.Controller
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
             deck.Cards = GenerateDeck();
+
             for (int i = 0; i < 7; i++)
             {
-            ShuffleDeck(deck.Cards); 
+                deck.Shuffle();
             }
-            players = GeneratePlayers();
 
+            players = GeneratePlayers();
+            PlayPoker();
             //GenerateWinningHands();
+        }
+
+        //main game play logic
+        private void PlayPoker()
+        {
+            bool exit = false;
+            do
+            {
+                Console.WriteLine("The buy in for this game is $100.");
+                for (int i = 0; i < players.Count; i++)
+                {
+                    players[i].Bank -= 100;
+                    Console.WriteLine($"{players[i].Name}, you bet in for $100...");
+                }
+
+                for (int i = 0; i < players.Count; i++)
+                {
+                    players[i].CardsInHand = deck.DealCards(4);
+                }
+
+            } while (!exit);
         }
 
         private List<Card> ShuffleDeck(List<Card> deck)
@@ -68,7 +91,7 @@ namespace Poker.Controller
         private List<Player> GeneratePlayers()
         {
             List<Player> results = new List<Player>();
-            int playerNum = CIO.PromptForInt("How many players are there?",2,5);
+            int playerNum = CIO.PromptForInt("How many players are there?", 2, 5);
             for (int i = 0; i < playerNum; i++)
             {
                 //Console.WriteLine(i);
@@ -79,11 +102,11 @@ namespace Poker.Controller
                     HandValue = 0,
                     HasBust = false,
                     HasFolded = false,
-                    Name = CIO.PromptForInput($"Player{i+1}, what is your name?",true),
+                    Name = CIO.PromptForInput($"Player{i + 1}, what is your name?", true),
                 };
                 if (player.Name == null || player.Name == "")
                 {
-                    player.Name = $"Player{i+1}";
+                    player.Name = $"Player{i + 1}";
                 }
                 results.Add(player);
             }
