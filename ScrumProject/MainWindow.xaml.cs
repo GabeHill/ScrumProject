@@ -25,32 +25,40 @@ namespace ScrumProject
             InitializeComponent();
         }
 
-        private void btnPoker_Click(object sender, RoutedEventArgs e)
-        {
-            //Name this whatever the poker window is called
-            //PokerWindow poker = new PokerWindow();
-            //poker.Show();
-            Close();
-        }
-
-        private void btnBlackjack_Click(object sender, RoutedEventArgs e)
-        {
-            //Name this whatever the blackjack window is called
-            //BlackjackWindow blackjack = new BlackjackWindow();
-            //blackjack.Show();
-            Close();
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lblGame.Height = lblGame.Width;
-            tblGame.Height = tblGame.Width;
+            List<string> games = new List<string> { "Poker", "Blackjack" };
+            lbxGames.ItemsSource = games;
         }
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            lblGame.Height = lblGame.Width;
-            tblGame.Height = tblGame.Width;
+            switch ((string)lbxGames.SelectedItem)
+            {
+                case "Poker":
+                    Close();
+                    break;
+                case "Blackjack":
+                    Close();
+                    break;
+            }
+        }
+
+        UserControl settings;
+        private void lbxGames_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            grdMain.Children.Remove(settings);
+            if ((string)lbxGames.SelectedItem == "Poker")
+            {
+                settings = new PokerSettings();
+
+            }
+            if ((string)lbxGames.SelectedItem == "Blackjack")
+            {
+                settings = new BlackjackSettings();
+            }
+            grdMain.Children.Add(settings);
+            Grid.SetColumn(settings, 1);
         }
     }
 }
