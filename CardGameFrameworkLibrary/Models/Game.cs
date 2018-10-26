@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGameFrameworkLibrary.Models
 {
-    class Game
+    public class Game
     {
         public List<Player> Players { get; set; }
         public Deck Deck { get; set; }

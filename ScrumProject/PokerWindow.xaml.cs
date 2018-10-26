@@ -23,9 +23,11 @@ namespace ScrumProject
 
         //PokerGameLogic game
 
-        public PokerWindow(int players)
+        public PokerWindow()
         {
             InitializeComponent();
+            PlayerInfoSetup();
+
             vb_CurrentPlayer.Child = new PlayerInfo(1);
             for (int i = 1; i < players; i++)
             {

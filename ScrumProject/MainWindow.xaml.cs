@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardGameFrameworkLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,8 @@ namespace ScrumProject
             {
                 case "Poker":
                     PokerSettings pokerSettings = (PokerSettings)settings;
-                    PokerWindow = new PokerWindow(int.Parse(pokerSettings.cmbxPlayerCount.Text));
+                    Game game = new Game();
+                    
                     PokerWindow.Show();
                     Close();
                     break;
