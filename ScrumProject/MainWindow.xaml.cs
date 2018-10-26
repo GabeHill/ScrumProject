@@ -20,6 +20,7 @@ namespace ScrumProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        PokerWindow PokerWindow;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +37,9 @@ namespace ScrumProject
             switch ((string)lbxGames.SelectedItem)
             {
                 case "Poker":
+                    PokerSettings pokerSettings = (PokerSettings)settings;
+                    PokerWindow = new PokerWindow(int.Parse(pokerSettings.cmbxPlayerCount.Text));
+                    PokerWindow.Show();
                     Close();
                     break;
                 case "Blackjack":
