@@ -10,11 +10,11 @@ namespace BlackJackLib
     public class BlackJack
     {
         //List of all  players Including House
-        public List<Player> Allplayers { get; set; }
+        public List<Player> Allplayers { get; private set; }
         //Current Deck
-        public Deck Deck { get; set; }
+        public Deck Deck { get; private set; }
         //Amount of somone could win
-        public int Pool { get; set; }
+        public int Pool { get; private set; }
 
         //Gets All the players that have no busted
         private void GetWinners()
@@ -54,6 +54,29 @@ namespace BlackJackLib
                     players.Remove(player);
                     break;
                 }
+            }
+        }
+
+        //Give Players Their winnings
+        public void EndTurn(List<Player> players)
+        {
+            int winnings = Pool / players.Count;
+            foreach (var player in players)
+            {
+                if (player.GetType() == typeof(Human))
+                {
+                    Human human = player as Human;
+                    human.Bank += winnings;
+                }
+            }
+        }
+
+        //Players Place Bet and receive new cards
+        public void StartNewTurn()
+        {
+            foreach (var player in Allplayers)
+            {
+                player.CardsInHand = (Deck.DealCards(2));
             }
         }
 

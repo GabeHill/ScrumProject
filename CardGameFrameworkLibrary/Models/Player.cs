@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace CardGameFrameworkLibrary.Models
 {
-    public class Player
+    public abstract class Player
     {
-        public int Bank { get; set; }
-        public string Name { get; set; }
         public List<Card> CardsInHand
         { get; set; }
         public bool HasFolded { get; set; }
@@ -28,16 +26,6 @@ namespace CardGameFrameworkLibrary.Models
                 total += card.Value;
             }
             return total;
-        }
-
-        //Place a bet and remove that amount from his "bank"
-        public void PlaceBet(int amount)
-        {
-            Bank = Bank - amount;
-            if (Bank < 0)
-            {
-                Bank = 0;
-            }
         }
     }
 }
