@@ -5,41 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScrumProject"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
-    <Grid>
+        Title="MainWindow" Loaded="Window_Loaded">
+    <Grid Name="grdMain">
         <Grid.RowDefinitions>
-            <RowDefinition Height="77*"/>
-            <RowDefinition Height="101*"/>
-            <RowDefinition Height="75*"/>
+            <RowDefinition Height="425*"/>
+            <RowDefinition Height="81*"/>
         </Grid.RowDefinitions>
-        <Grid.Background>
-            <ImageBrush ImageSource="Images/backgroundcasino.jpg"/>
-        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="84*"/>
-            <ColumnDefinition Width="206*"/>
-            <ColumnDefinition Width="187*"/>
-            <ColumnDefinition Width="206*"/>
-            <ColumnDefinition Width="84*"/>
+            <ColumnDefinition Width="190*"/>
+            <ColumnDefinition Width="190*"/>
         </Grid.ColumnDefinitions>
-        <Button Name="btnPoker" Content="Poker" Foreground="OrangeRed" FontWeight="Bold" FontSize="40" Click="btnPoker_Click" Grid.Column="1" Grid.Row="1">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/betterpokerhand.jpg"/>
-            </Button.Background>
-        </Button>
-        <Button Name="btnBlackjack" Content="Blackjack" Grid.Column="3" Foreground="OrangeRed" FontSize="40" FontWeight="Bold" Click="btnBlackjack_Click" Grid.Row="1">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/blackjack.jpg"/>
-            </Button.Background>
-        </Button>
-        <Label Name="lblGame" Grid.Column="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="30" Height="130">
-            <TextBlock Name="tblGame" TextAlignment="Center" Foreground="OrangeRed">
-                Choose
-                <LineBreak></LineBreak>
-                A
-                <LineBreak></LineBreak>
-                Game!
-            </TextBlock>
-        </Label>
+        <Button Name="btnStart" Grid.ColumnSpan="2" Content="Start" Grid.Row="1" Width="75" Height="61" Click="btnStart_Click"/>
+        <ListBox Name="lbxGames" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="lbxGames_SelectionChanged"/>
+        
     </Grid>
 </Window>
