@@ -7,21 +7,14 @@ using CardGameFrameworkLibrary.Models;
 
 namespace BlackJackLib
 {
-    public class BlackJack
+    public class BlackJack: Game
     {
-        //List of all  players Including House
-        public List<Player> Allplayers { get; private set; }
-        //Current Deck
-        public Deck Deck { get; private set; }
-        //Amount of somone could win
-        public int Pool { get; private set; }
-
         //Gets All the players that have no busted
         private void GetWinners()
         {
             List<Player> contenders = new List<Player>();
 
-            foreach (var player in Allplayers)
+            foreach (var player in Players)
             {
                 if (!player.HasBust)
                 {
@@ -63,18 +56,14 @@ namespace BlackJackLib
             int winnings = Pool / players.Count;
             foreach (var player in players)
             {
-                if (player.GetType() == typeof(Human))
-                {
-                    Human human = player as Human;
-                    human.Bank += winnings;
-                }
+                player.Bank += winnings;
             }
         }
 
         //Players Place Bet and receive new cards
         public void StartNewTurn()
         {
-            foreach (var player in Allplayers)
+            foreach (var player in Players)
             {
                 player.CardsInHand = (Deck.DealCards(2));
             }

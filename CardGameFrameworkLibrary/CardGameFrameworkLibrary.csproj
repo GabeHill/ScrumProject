@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Deck.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Hand.cs" />
     <Compile Include="Models\House.cs" />
     <Compile Include="Models\Human.cs" />

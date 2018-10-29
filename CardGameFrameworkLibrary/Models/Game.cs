@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace CardGameFrameworkLibrary.Models
 {
-    public class Human: Player
+    public abstract class Game
     {
-        public string Name { get; set; }
-
-        //Place a bet and remove that amount from his "bank"
-
+        public List<Player> Players { get; set; }
+        public int Pool { get; set; }
+        public Deck Deck { get; set; }
     }
 }
