@@ -12,9 +12,9 @@ namespace CardGameFrameworkLibrary.Models
         public List<Card> Cards { get; set; }
 
 
-        public Deck()
+        public Deck(string gameType)
         {
-            Cards = GenerateDeck();
+            Cards = GenerateDeck(gameType);
             Shuffle();
         }
 
@@ -61,7 +61,7 @@ namespace CardGameFrameworkLibrary.Models
             return DealtCards;
         }
 
-        private List<Card> GenerateDeck()
+        private List<Card> GenerateDeck(string gameType)
         {
             //next few lines of code setup variables to get images
             string resourcePath = "../../../CardGameFrameworkLibrary/Resource/";
@@ -99,15 +99,41 @@ namespace CardGameFrameworkLibrary.Models
                 //
                 for (int j = 0; j < 13; j++)
                 {
+                    Card card = null;
                     string cardName = "";
-                    Card card = new Card()
+                    switch (gameType)
                     {
-                        Suit = suitList[color],
-                        Rank = rankList[j],
-                        Value = (j + 2)
+                        case "Poker":
+                            card = new Card()
+                            {
+                                Suit = suitList[color],
+                                Rank = rankList[j],
+                                Value = (j + 2)
 
-                    };
+                            };
+                            break;
+                        case "Blackjack":
+                            card = new Card()
+                            {
+                                Suit = suitList[color],
+                                Rank = rankList[j],
+                                Value = (j + 2)
 
+                            };
+                            if(card.Value > 10)
+                            {
+                                card.Value = 10;
+                            }
+                            if(card.Rank == Rank.ACE)
+                            {
+                                card.Value = 11;
+                            }
+                            break;
+                        default:
+                            card = new Card();
+                            break;
+
+                    }
                     //setting this temp variable to the suitX to match filenames in resource folder
                     cardName = $"{card.Suit}{card.Rank}";
                     foreach (var fileName in fileNames)

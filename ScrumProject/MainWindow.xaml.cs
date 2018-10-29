@@ -39,8 +39,6 @@ namespace ScrumProject
             {
                 case "Poker":
                     PokerSettings pokerSettings = (PokerSettings)settings;
-                    Game game = new Game();
-                    
                     PokerWindow.Show();
                     Close();
                     break;

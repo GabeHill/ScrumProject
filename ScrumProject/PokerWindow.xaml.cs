@@ -28,16 +28,19 @@ namespace ScrumProject
             InitializeComponent();
             PlayerInfoSetup();
 
+        }
+
+        private void PlayerInfoSetup()
+        {
             vb_CurrentPlayer.Child = new PlayerInfo(1);
             for (int i = 1; i < players; i++)
             {
-                dp_PlayerBench.Children.Add(new PlayerInfo(i+1));
+                dp_PlayerBench.Children.Add(new PlayerInfo(i + 1));
             }
             foreach (PlayerInfo player in dp_PlayerBench.Children)
             {
                 player.sp_Cards.Visibility = Visibility.Hidden;
             }
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
