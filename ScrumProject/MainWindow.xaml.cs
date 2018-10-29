@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardGameFrameworkLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace ScrumProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        PokerWindow PokerWindow;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +38,8 @@ namespace ScrumProject
             switch ((string)lbxGames.SelectedItem)
             {
                 case "Poker":
+                    PokerSettings pokerSettings = (PokerSettings)settings;
+                    PokerWindow.Show();
                     Close();
                     break;
                 case "Blackjack":
