@@ -7,12 +7,12 @@ using CSC160_ConsoleMenu;
 
 namespace Poker.Controller
 {
-    public class PokerLogic
+    public class PokerLogic: Game
     {
         //public List<List<Card>> WinningHands = CheckForWinningHand();
 
         //Deck to be used (or passed around in code) in game
-        public static Deck deck = new Deck();
+        public static Deck deck = new Deck("Poker");
         public static List<Player> players = new List<Player>();
         public void Setup()
         {
@@ -34,17 +34,13 @@ namespace Poker.Controller
             //two pair - 4 cards, two 2 pair that are matched with a 5th card (J-J-3-3-9)
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
-            CheckForWinningHand();
+            //CheckForWinningHand();
             deck.Cards = GenerateDeck();
-
-            for (int i = 0; i < 7; i++)
-            {
-                deck.Cards = ShuffleDeck(deck.Cards);
-            }
-
-
+            GameDeck.Cards = deck.Cards;
             players = GeneratePlayers();
-            PlayPoker();
+            Players.AddRange(players);
+            
+            //PlayPoker();
         }
 
         //main game play logic
@@ -57,13 +53,11 @@ namespace Poker.Controller
                 for (int i = 0; i < players.Count; i++)
                 {
                     players[i].Bank -= 100;
-                    Console.WriteLine($"{players[i].Name}, you bet in for $100...");
+                    players[i].CardsInHand = deck.DealCards(5);
+                    Console.WriteLine($"{players[i].Name}, you bet in for $100 and were dealt your hand...");
                 }
 
-                for (int i = 0; i < players.Count; i++)
-                {
-                    players[i].CardsInHand = deck.DealCards(4);
-                }
+                
 
             } while (!exit);
         }
@@ -192,22 +186,22 @@ namespace Poker.Controller
             ROYALFLUSH
         }
 
-        private static List<List<Card>> CheckForWinningHand()
-        {
-            List<Hands> enumList = new List<Hands>();
-            foreach (Hands hand in (Hands[])Enum.GetValues(typeof(Hands)))
-            {
-                enumList.Add(hand);
-            }
+        //private static List<List<Card>> CheckForWinningHand()
+        //{
+        //    List<Hands> enumList = new List<Hands>();
+        //    foreach (Hands hand in (Hands[])Enum.GetValues(typeof(Hands)))
+        //    {
+        //        enumList.Add(hand);
+        //    }
 
-            foreach (Player player in players)
-            {
-                for (int i = 0; i < player.CardsInHand.Count; i++)
-                {
-                    Suit suit = player.CardsInHand[i].Suit;
-                }
-            }
-            return null;
-        }
+        //    foreach (Player player in players)
+        //    {
+        //        for (int i = 0; i < player.CardsInHand.Count; i++)
+        //        {
+        //            Suit suit = player.CardsInHand[i].Suit;
+        //        }
+        //    }
+        //    return null;
+        //}
     }
 }

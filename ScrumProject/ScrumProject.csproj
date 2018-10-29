@@ -128,6 +128,10 @@
       <Project>{4dcf7ef0-ae5f-4f66-8025-d878dec76afa}</Project>
       <Name>CardGameFrameworkLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Poker\Poker.csproj">
+      <Project>{8a77f685-a000-493a-a230-9a5588cba297}</Project>
+      <Name>Poker</Name>
+    </ProjectReference>
     <Resource Include="Images\backgroundcasino.jpg" />
     <Resource Include="Images\betterpokerhand.jpg" />
     <Resource Include="Images\blackjack.jpg" />

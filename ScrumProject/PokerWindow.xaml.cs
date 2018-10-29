@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Poker.Controller;
+using CardGameFrameworkLibrary.Models;
 
 namespace ScrumProject
 {
@@ -21,19 +23,22 @@ namespace ScrumProject
     public partial class PokerWindow : Window
     {
 
+        PokerLogic poker;
         //PokerGameLogic game
 
         public PokerWindow()
         {
             InitializeComponent();
+            poker = new PokerLogic();
             PlayerInfoSetup();
 
         }
 
         private void PlayerInfoSetup()
         {
+            poker.Setup();
             vb_CurrentPlayer.Child = new PlayerInfo(1);
-            for (int i = 1; i < players; i++)
+            for (int i = 1; i < poker.Players.Count; i++)
             {
                 dp_PlayerBench.Children.Add(new PlayerInfo(i + 1));
             }
@@ -50,8 +55,8 @@ namespace ScrumProject
 
         private void NextPlayer()
         {
-            PlayerInfo CurrentPlayer = (PlayerInfo) vb_CurrentPlayer.Child;
-            PlayerInfo NextPlayer = (PlayerInfo) dp_PlayerBench.Children[0];
+            PlayerInfo CurrentPlayer = (PlayerInfo)vb_CurrentPlayer.Child;
+            PlayerInfo NextPlayer = (PlayerInfo)dp_PlayerBench.Children[0];
             dp_PlayerBench.Children.Remove(NextPlayer);
             vb_CurrentPlayer.Child = null;
             dp_PlayerBench.Children.Add(CurrentPlayer);
