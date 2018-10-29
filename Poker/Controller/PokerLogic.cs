@@ -9,7 +9,7 @@ namespace Poker.Controller
 {
     public class PokerLogic
     {
-        //public List<List<Card>> WinningHands = GenerateWinningHands();
+        //public List<List<Card>> WinningHands = CheckForWinningHand();
 
         //Deck to be used (or passed around in code) in game
         public static Deck deck = new Deck();
@@ -34,16 +34,17 @@ namespace Poker.Controller
             //two pair - 4 cards, two 2 pair that are matched with a 5th card (J-J-3-3-9)
             //pair - 2 matching cards with 3 additonal non-matching cards (J-J-K-4-8)
             //high card - Highest value card in your hand
+            CheckForWinningHand();
             deck.Cards = GenerateDeck();
 
             for (int i = 0; i < 7; i++)
             {
-                deck.Shuffle();
+                deck.Cards = ShuffleDeck(deck.Cards);
             }
+
 
             players = GeneratePlayers();
             PlayPoker();
-            //GenerateWinningHands();
         }
 
         //main game play logic
@@ -112,12 +113,6 @@ namespace Poker.Controller
             }
             return results;
         }
-
-        //private static List<List<Card>> GenerateWinningHands()
-        //{
-        //    //throw new NotImplementedException();
-        //}
-
         private static List<Card> GenerateDeck()
         {
             //next few lines of code setup variables to get images
@@ -182,6 +177,37 @@ namespace Poker.Controller
                 color++;
             }
             return newDeck;
+        }
+        public enum Hands
+        {
+            HIGHCARD = 1,
+            PAIR,
+            TWOPAIR,
+            THREEKIND,
+            STRAIGHT,
+            FLUSH,
+            FULLHOUSE,
+            FOURKIND,
+            STRAIGHTFLUSH,
+            ROYALFLUSH
+        }
+
+        private static List<List<Card>> CheckForWinningHand()
+        {
+            List<Hands> enumList = new List<Hands>();
+            foreach (Hands hand in (Hands[])Enum.GetValues(typeof(Hands)))
+            {
+                enumList.Add(hand);
+            }
+
+            foreach (Player player in players)
+            {
+                for (int i = 0; i < player.CardsInHand.Count; i++)
+                {
+                    Suit suit = player.CardsInHand[i].Suit;
+                }
+            }
+            return null;
         }
     }
 }
