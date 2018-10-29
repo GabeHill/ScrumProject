@@ -20,7 +20,7 @@ namespace ScrumProject
     /// </summary>
     public partial class PokerWindow : Window
     {
-
+        int players = 0;
         //PokerGameLogic game
 
         public PokerWindow()
