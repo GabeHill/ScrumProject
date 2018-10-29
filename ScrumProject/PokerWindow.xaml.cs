@@ -22,8 +22,12 @@ namespace ScrumProject
     /// </summary>
     public partial class PokerWindow : Window
     {
+<<<<<<< HEAD
 
         PokerLogic poker;
+=======
+        int players = 0;
+>>>>>>> master
         //PokerGameLogic game
 
         public PokerWindow()
