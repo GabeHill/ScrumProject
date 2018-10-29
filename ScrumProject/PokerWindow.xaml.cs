@@ -22,27 +22,28 @@ namespace ScrumProject
     /// </summary>
     public partial class PokerWindow : Window
     {
-<<<<<<< HEAD
-
         PokerLogic poker;
-=======
+        List<string> PlayerNames;
+        bool House;
         int players = 0;
->>>>>>> master
         //PokerGameLogic game
 
-        public PokerWindow()
+        public PokerWindow(List<string> playernames, bool house)
         {
             InitializeComponent();
             poker = new PokerLogic();
+            PlayerNames = playernames;
+            players = PlayerNames.Count;
+            House = house;
             PlayerInfoSetup();
 
         }
 
         private void PlayerInfoSetup()
         {
-            poker.Setup();
+            //poker.Setup();
             vb_CurrentPlayer.Child = new PlayerInfo(1);
-            for (int i = 1; i < poker.Players.Count; i++)
+            for (int i = 1; i < PlayerNames.Count; i++)
             {
                 dp_PlayerBench.Children.Add(new PlayerInfo(i + 1));
             }

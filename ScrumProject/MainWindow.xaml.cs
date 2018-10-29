@@ -39,10 +39,6 @@ namespace ScrumProject
             {
                 case "Poker":
                     PokerSettings pokerSettings = (PokerSettings)settings;
-<<<<<<< HEAD
-                    PokerWindow = new PokerWindow();
-                    PokerWindow.Show();
-=======
                     List<string> pokerNames = new List<string>();
                     for (int i = 0; i < (int)pokerSettings.cmbxPlayerCount.SelectedItem; i++)
                     {
@@ -51,12 +47,8 @@ namespace ScrumProject
                         pokerNames.Add(name.Text);
                     }
                     PokerWindow pokerWindow = new PokerWindow(pokerNames, (bool)pokerSettings.cbxWithHouse.IsChecked);
-<<<<<<< HEAD
 
->>>>>>> master
-=======
                     pokerWindow.Show();
->>>>>>> master
                     Close();
                     break;
                 case "Blackjack":
