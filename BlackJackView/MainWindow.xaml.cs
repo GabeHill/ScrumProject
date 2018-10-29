@@ -42,6 +42,7 @@ namespace BlackJackView
                 border.Padding = new Thickness(5.0);
                 border.Child = rectangle;
                 ugridPlayers.Children.Add(border);
+                MessageBox.Show(playerNames[i]);
             }
         }
 
