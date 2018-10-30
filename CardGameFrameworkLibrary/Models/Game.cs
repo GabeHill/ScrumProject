@@ -12,6 +12,15 @@ namespace CardGameFrameworkLibrary.Models
         public Deck GameDeck { get; set; }
         public int Pot { get; set; }
         public House Dealer { get; set; }
+        public Player RaisingPlayer { get; set; }
+        public int MinimumBet { get; set; }
+        public Phases Phase { get; set; }
+    }
+
+    public enum Phases
+    {
+        BETTING,
+        DRAWING
     }
 }
 

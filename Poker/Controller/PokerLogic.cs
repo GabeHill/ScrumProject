@@ -19,12 +19,17 @@ namespace Poker.Controller
             Players = new List<Player>();
             if (isChecked == true)
             {
-                Players.Add(new House()
+                House house = new House()
                 {
                     Name = "House",
                     Bank = 5000,
-                });
+                    CardsInHand = new List<Card>()
+                };
+                Players.Add(house);
+                Dealer = house;
             }
+            MinimumBet = 0;
+            Phase = Phases.BETTING;
         }
 
         public void Deal()
@@ -38,6 +43,16 @@ namespace Poker.Controller
                     player.CardsInHand.Add(GameDeck.DrawCard());
                 }
             }
+        }
+        public void SetBet(Player currentPlayer, int bet)
+        {
+            if(bet > MinimumBet)
+            currentPlayer.Bet = bet;
+            {
+                RaisingPlayer = currentPlayer;
+                MinimumBet = bet;
+            }
+
         }
 
         //iterate through all the players to check their hands
@@ -143,6 +158,7 @@ namespace Poker.Controller
             }
             return high;
         }
+
         #endregion
         #region Pair
         //Check to see if the cards has one pair (ACE Ace) with any suit
