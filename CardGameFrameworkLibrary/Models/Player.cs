@@ -13,11 +13,25 @@ namespace CardGameFrameworkLibrary.Models
         public string Name { get; set; }
         public List<Card> CardsInHand { get; set; }
         public bool HasFolded { get; set; }
-        public bool HasBust { get; set; }
+        public bool HasBust
+        {
+            get { return Bust(); }
+        }
         public int HandValue { get; set; }
+
+        private bool Bust()
+        {
+            GetHandValue();
+            if (HandValue > 21)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public void GetHandValue()
         {
+            HandValue = 0;
             foreach (var card in CardsInHand)
             {
                 HandValue += card.Value;
