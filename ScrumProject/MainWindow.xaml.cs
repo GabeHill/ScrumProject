@@ -39,11 +39,29 @@ namespace ScrumProject
             {
                 case "Poker":
                     PokerSettings pokerSettings = (PokerSettings)settings;
-                    PokerWindow = new PokerWindow();
-                    PokerWindow.Show();
+                    List<string> pokerNames = new List<string>();
+                    for (int i = 0; i < (int)pokerSettings.cmbxPlayerCount.SelectedItem; i++)
+                    {
+                        var nameHolder = (StackPanel)pokerSettings.ugridPlayerNames.Children[i];
+                        var name = (TextBox)nameHolder.Children[1];
+                        pokerNames.Add(name.Text);
+                    }
+                    PokerWindow pokerWindow = new PokerWindow(pokerNames, (bool)pokerSettings.cbxWithHouse.IsChecked);
+
+                    pokerWindow.Show();
                     Close();
                     break;
                 case "Blackjack":
+                    BlackjackSettings blackjackSettings = (BlackjackSettings)settings;
+                    List<string> blackjackNames = new List<string>();
+                    for (int i = 0; i < (int)blackjackSettings.cmbxPlayerCount.SelectedItem; i++)
+                    {
+                        var nameHolder = (StackPanel)blackjackSettings.ugridPlayerNames.Children[i];
+                        var name = (TextBox)nameHolder.Children[1];
+                        blackjackNames.Add(name.Text);
+                    }
+                    BlackJackView.MainWindow blackjackWindow = new BlackJackView.MainWindow(blackjackNames, (bool)blackjackSettings.cbxWithHouse.IsChecked);
+                    blackjackWindow.Show();
                     Close();
                     break;
             }
