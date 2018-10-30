@@ -118,6 +118,30 @@ namespace PokerView
             }
         }
 
+        private void Discard()
+        {
+            List<Card> temp = new List<Card>();
+            foreach (Card card in CurrentPlayer.CardsInHand)
+            {
+                temp.AddRange(CurrentPlayer.CardsInHand);
+                if (!card.IsKept)
+                {
+                    temp.Remove(card);
+                }
+            }
+            CurrentPlayer.CardsInHand = temp;
+        }
+
+        private void Drawing()
+        {
+            while (CurrentPlayer.CardsInHand.Count <= 5)
+            {
+                CurrentPlayer.CardsInHand.Add(poker.GameDeck.DrawCard());
+            }
+            //draw number of cards depending on number discarded(amount)
+            throw new NotImplementedException();
+        }
+
         private bool IsBettingPhase()
         {
             if (CurrentPlayer.Equals(poker.RaisingPlayer) && poker.Phase == Phases.DRAWING)
@@ -172,11 +196,11 @@ namespace PokerView
 
         private void PlaceBet(object sender, RoutedEventArgs e)
         {
-            
+
             int bet = int.Parse(tbBet.Text);
             poker.SetBet(CurrentPlayer, bet);
             NextPlayer();
-            
+
         }
 
 
