@@ -9,6 +9,11 @@ namespace BlackJackLib
 {
     public class BlackJack
     {
+        public BlackJack()
+        {
+            Allplayers = new List<Player>();
+            Deck = new Deck("Blackjack");
+        }
         //List of all  players Including House
         public List<Player> Allplayers { get; set; }
         //Current Deck
@@ -17,46 +22,54 @@ namespace BlackJackLib
         public int Pool { get; set; }
 
         //Gets All the players that have no busted
-        private void GetWinners()
+        public List<Player> GetWinners()
         {
             List<Player> contenders = new List<Player>();
 
             foreach (var player in Allplayers)
             {
-                if (!player.HasFolded)
+                if (!player.HasBust)
                 {
                     contenders.Add(player);
                 }
             }
             CheckHighest(contenders);
+
+            return contenders;
         }
         //Grab all the players who 
         private void CheckHighest(List<Player> players)
         {
-            int low = 2;
-            bool HasWinner = false;
-            while (!HasWinner)
-            {
-                if (players.Count > 1)
-                {
-                    Remove(low, players);
-                }
-                else
-                {
-                    HasWinner = true;
-                }
-                low++;
-            }
+            int highestHigh = GetHighestHigh(players);
+            Remove(highestHigh, players);
         }
 
-        //Removes player if lower than the low
-        public void Remove(int low,List<Player> players)
+        private int GetHighestHigh(List<Player> players)
+        {
+            int high = 2;
+            foreach (var player in players)
+            {
+                player.GetHandValue();
+                if (player.HandValue > high)
+                {
+                    high = player.HandValue;
+                }
+                if (high == 21)
+                {
+                    return high;
+                }
+            }
+            return high;
+        }
+
+        //Removes player if lower than the highest number
+        public void Remove(int high, List<Player> players)
         {
             foreach (var player in players)
             {
                 if (players.Count > 1)
                 {
-                    if (player.HandValue < low)
+                    if (player.HandValue < high)
                     {
                         players.Remove(player);
                         break;
