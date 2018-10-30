@@ -38,6 +38,7 @@ namespace CardGameFrameworkLibrary.Models
         public int Value { get; set; }
         public Rank Rank { get; set; }
         public string ImageSource { get; set; }
+        public bool IsKept { get; set; }
 
 
 
