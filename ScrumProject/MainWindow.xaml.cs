@@ -22,7 +22,6 @@ namespace ScrumProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        PokerWindow PokerWindow;
         public MainWindow()
         {
             InitializeComponent();
