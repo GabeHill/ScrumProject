@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="ScrumProject.User_Controls.PlayerInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ScrumProject.User_Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="120" d:DesignWidth="166.295">
+    <Grid>
+        <StackPanel>
+            <TextBlock Name="lbName" Text="{Binding Name}"></TextBlock>
+            <TextBlock Name="lbPot" Text="{Binding Bank, StringFormat=Bank: {0:C}}"></TextBlock>
+            <TextBlock Name="lbBet" Text="{Binding Bet, StringFormat=Bet: {0:C}}"></TextBlock>
+            <StackPanel Name="sp_Cards" Orientation="Horizontal" Margin="30,0,0,0">
+            </StackPanel>
+            <StackPanel Name="sp_SelectCards" Orientation="Horizontal">
+                <Label Content="Keep:" FontSize="8"></Label>
+                <CheckBox Name="card1" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Name="card2" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Name="card3" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Name="card4" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Name="card5" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

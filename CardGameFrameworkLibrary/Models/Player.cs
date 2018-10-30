@@ -9,6 +9,7 @@ namespace CardGameFrameworkLibrary.Models
     public class Player
     {
         public int Bank { get; set; }
+        public int Bet { get; set; }
         public string Name { get; set; }
         public List<Card> CardsInHand { get; set; }
         public bool HasFolded { get; set; }

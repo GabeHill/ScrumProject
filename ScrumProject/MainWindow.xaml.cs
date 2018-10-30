@@ -1,4 +1,5 @@
 ﻿using CardGameFrameworkLibrary.Models;
+using Poker.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,15 +41,22 @@ namespace ScrumProject
                 case "Poker":
                     PokerSettings pokerSettings = (PokerSettings)settings;
                     List<string> pokerNames = new List<string>();
+                    PokerLogic poker = new PokerLogic(pokerSettings.cbxWithHouse.IsChecked);
+
                     for (int i = 0; i < (int)pokerSettings.cmbxPlayerCount.SelectedItem; i++)
                     {
                         var nameHolder = (StackPanel)pokerSettings.ugridPlayerNames.Children[i];
                         var name = (TextBox)nameHolder.Children[1];
-                        pokerNames.Add(name.Text);
+                        poker.Players.Add(new Player()
+                        {
+                            Name = name.Text,
+                            Bank = 500,
+                            CardsInHand = new List<Card>()
+                        });
                     }
-                    PokerWindow pokerWindow = new PokerWindow(pokerNames, (bool)pokerSettings.cbxWithHouse.IsChecked);
+                    PokerWindow = new PokerWindow(poker);
 
-                    pokerWindow.Show();
+                    PokerWindow.Show();
                     Close();
                     break;
                 case "Blackjack":

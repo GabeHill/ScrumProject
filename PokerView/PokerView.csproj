@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2EE6B758-1981-425A-8431-DEA2CF51BD52}</ProjectGuid>
+    <ProjectGuid>{B4228E5B-05E5-498B-8E90-EE172D99B19E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ScrumProject</RootNamespace>
-    <AssemblyName>ScrumProject</AssemblyName>
+    <RootNamespace>PokerView</RootNamespace>
+    <AssemblyName>PokerView</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -37,7 +37,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,34 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="User Controls\BlackjackSettings.xaml.cs">
-      <DependentUpon>BlackjackSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Controls\PokerSettings.xaml.cs">
-      <DependentUpon>PokerSettings.xaml</DependentUpon>
-    </Compile>
-    <Page Include="User Controls\BlackjackSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="User Controls\PokerSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlayerInfo.xaml.cs">
+      <DependentUpon>PlayerInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PokerWindow.xaml.cs">
+      <DependentUpon>PokerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -98,7 +81,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -110,29 +93,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlackJackLib\BlackJackLib.csproj">
-      <Project>{8fdb4866-db7e-47c5-ada6-db86fb86bbbf}</Project>
-      <Name>BlackJackLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlackJackView\BlackJackView.csproj">
-      <Project>{7dfbc0c8-0435-4fec-b3ff-e3fb88ded1c4}</Project>
-      <Name>BlackJackView</Name>
-    </ProjectReference>
+    <Page Include="PlayerInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PokerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\CardGameFrameworkLibrary\CardGameFrameworkLibrary.csproj">
-      <Project>{4dcf7ef0-ae5f-4f66-8025-d878dec76afa}</Project>
+      <Project>{4DCF7EF0-AE5F-4F66-8025-D878DEC76AFA}</Project>
       <Name>CardGameFrameworkLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PokerView\PokerView.csproj">
-      <Project>{b4228e5b-05e5-498b-8e90-ee172d99b19e}</Project>
-      <Name>PokerView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Poker\Poker.csproj">
-      <Project>{8a77f685-a000-493a-a230-9a5588cba297}</Project>
+      <Project>{8A77F685-A000-493A-A230-9A5588CBA297}</Project>
       <Name>Poker</Name>
     </ProjectReference>
-    <Resource Include="Images\backgroundcasino.jpg" />
-    <Resource Include="Images\betterpokerhand.jpg" />
-    <Resource Include="Images\blackjack.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

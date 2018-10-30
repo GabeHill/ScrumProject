@@ -65,6 +65,7 @@ namespace CardGameFrameworkLibrary.Models
         {
             //next few lines of code setup variables to get images
             string resourcePath = "../../../CardGameFrameworkLibrary/Resource/";
+            string path = "pack://application:,,,/CardGameFrameworkLibrary;component/Resource/";
             string[] cardImagePath = Directory.GetFiles(resourcePath);
             List<string> fileNames = new List<string>();
             foreach (string file in cardImagePath)
@@ -140,12 +141,11 @@ namespace CardGameFrameworkLibrary.Models
                     {
                         if (fileName.Contains(cardName))
                         {
-                            card.ImageSource = resourcePath + fileName;
-                            //Console.WriteLine(fileName);
+                            card.ImageSource = path + fileName;
+                            
                             break;
                         }
                     }
-                    //card.ImageSource =
                     newDeck.Add(card);
                 }
                 color++;

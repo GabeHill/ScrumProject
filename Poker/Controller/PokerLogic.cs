@@ -8,7 +8,39 @@ namespace Poker.Controller
 {
     public class PokerLogic : Game
     {
-        //iterate through all  the players to check their hands
+        public PokerLogic(bool? isChecked)
+        {
+            SetUp(isChecked);
+            
+        }
+
+        private void SetUp(bool? isChecked)
+        {
+            Players = new List<Player>();
+            if (isChecked == true)
+            {
+                Players.Add(new House()
+                {
+                    Name = "House",
+                    Bank = 5000,
+                });
+            }
+        }
+
+        public void Deal()
+        {
+            GameDeck = new Deck("Poker");
+            GameDeck.Shuffle();
+            for (int i = 0; i < 5; i++)
+            {
+                foreach (Player player in Players)
+                {
+                    player.CardsInHand.Add(GameDeck.DrawCard());
+                }
+            }
+        }
+
+        //iterate through all the players to check their hands
         public void CheckForWinningHand()
         {
             //Go through each players hands to get a value
@@ -69,6 +101,7 @@ namespace Poker.Controller
                 player.HandValue = 1;
             }
         }
+
         #region High
         //in case of everyone having only a high return all players who have the highest card
         public List<Player> GetHighestWinners()

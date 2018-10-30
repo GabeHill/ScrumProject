@@ -23,33 +23,46 @@ namespace ScrumProject
     public partial class PokerWindow : Window
     {
         PokerLogic poker;
-        List<string> PlayerNames;
-        bool House;
-        int players = 0;
-        //PokerGameLogic game
+        List<PlayerInfo> PlayerInfoTiles = new List<PlayerInfo>();
 
-        public PokerWindow(List<string> playernames, bool house)
+        public PokerWindow(PokerLogic pokerLogic)
         {
             InitializeComponent();
-            poker = new PokerLogic();
-            PlayerNames = playernames;
-            players = PlayerNames.Count;
-            House = house;
+            poker = pokerLogic;
             PlayerInfoSetup();
 
         }
 
         private void PlayerInfoSetup()
         {
-            //poker.Setup();
-            vb_CurrentPlayer.Child = new PlayerInfo(1);
-            for (int i = 1; i < PlayerNames.Count; i++)
+
+            PlayerInfo CurrentPlayer = new PlayerInfo(poker.Players[0]);
+            PlayerInfoTiles.Add(CurrentPlayer);
+            vb_CurrentPlayer.Child = CurrentPlayer;
+            for (int i = 1; i < poker.Players.Count; i++)
             {
-                dp_PlayerBench.Children.Add(new PlayerInfo(i + 1));
+                PlayerInfo NextPlayer = new PlayerInfo(poker.Players[i]);
+                PlayerInfoTiles.Add(NextPlayer);
+                dp_PlayerBench.Children.Add(NextPlayer);
             }
             foreach (PlayerInfo player in dp_PlayerBench.Children)
             {
                 player.sp_Cards.Visibility = Visibility.Hidden;
+            }
+            NextPlayer();
+            poker.Deal();
+
+            foreach (PlayerInfo info in PlayerInfoTiles)
+            {
+                foreach (Card card in info.player.CardsInHand)
+                {
+                    info.sp_Cards.Children.Add(new Image()
+                    {
+                        Source = new BitmapImage(new Uri(card.ImageSource, UriKind.Absolute)),
+                        MaxHeight = 50
+
+                    });
+                }
             }
         }
 
@@ -67,7 +80,9 @@ namespace ScrumProject
             dp_PlayerBench.Children.Add(CurrentPlayer);
             vb_CurrentPlayer.Child = NextPlayer;
             CurrentPlayer.sp_Cards.Visibility = Visibility.Hidden;
+            CurrentPlayer.sp_SelectCards.Visibility = Visibility.Hidden;
             NextPlayer.sp_Cards.Visibility = Visibility.Visible;
+            NextPlayer.sp_SelectCards.Visibility = Visibility.Visible;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardGameFrameworkLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,12 @@ namespace ScrumProject.User_Controls
     /// </summary>
     public partial class PlayerInfo : UserControl
     {
-        public PlayerInfo(int i)
+        public Player player;
+        public PlayerInfo(Player player)
         {
+            this.player = player;
+            DataContext = player;
             InitializeComponent();
-            lbName.Content = $"Player: {i}";
         }
     }
 }
