@@ -9,8 +9,5 @@ namespace CardGameFrameworkLibrary.Models
     public class Human: Player
     {
         public string Name { get; set; }
-
-        //Place a bet and remove that amount from his "bank"
-
     }
 }

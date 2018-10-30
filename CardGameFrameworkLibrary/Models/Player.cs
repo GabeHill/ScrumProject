@@ -8,6 +8,8 @@ namespace CardGameFrameworkLibrary.Models
 {
     public abstract class Player
     {
+        public string Name { get; set; }
+        public int Bank { get; set; }
         public List<Card> CardsInHand { get; set; }
         public bool HasFolded { get; set; }
         public bool HasBust
@@ -26,7 +28,6 @@ namespace CardGameFrameworkLibrary.Models
             return false;
         }
 
-        public void GetHandValue()
         //if bet is larger than their bank they go all  in
         public void PlaceBet(int amount)
         {
@@ -42,13 +43,13 @@ namespace CardGameFrameworkLibrary.Models
             HandValue = 0;
             foreach (var card in CardsInHand)
             {
-                total += card.Value;
-                if (total > 21 && card.Rank == Rank.ACE)
+                HandValue += card.Value;
+                if (HandValue > 21 && card.Rank == Rank.ACE)
                 {
-                    total = total - 10;
+                    HandValue = HandValue - 10;
                 }
             }
-            return total;
+            return HandValue;
         }
     }
 }
