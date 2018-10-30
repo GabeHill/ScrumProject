@@ -8,21 +8,7 @@ namespace Poker.Controller
 {
     public class PokerLogic : Game
     {
-
-        public enum Hands
-        {
-            HIGHCARD = 1,
-            PAIR,
-            TWOPAIR,
-            THREEKIND,
-            STRAIGHT,
-            FLUSH,
-            FULLHOUSE,
-            FOURKIND,
-            STRAIGHTFLUSH,
-            ROYALFLUSH
-        }
-
+        //iterate through all  the players to check their hands
         public void CheckForWinningHand()
         {
             //Go through each players hands to get a value
@@ -32,17 +18,7 @@ namespace Poker.Controller
             }
         }
 
-        private void GetPossibleHands()
-        {
-            List<Hands> enumList = new List<Hands>();
-            foreach (Hands hand in (Hands[])Enum.GetValues(typeof(Hands)))
-            {
-                enumList.Add(hand);
-            }
-        }
-
-
-
+        //Player has his hand evaluated and given a corresponding handvalue
         private void CheckHands(Player player)
         {
             //Make list out of players cards in hand
