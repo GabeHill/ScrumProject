@@ -37,8 +37,8 @@ namespace CardGameFrameworkLibrary.Models
     public class Card
     {
         public Suit Suit { get; set; }
-        public int Value { get; set; }
         public Rank Rank { get; set; }
+        public int Value { get; set; }
         public string ImageSource { get; set; }
         public bool Selected { get; set; }
 

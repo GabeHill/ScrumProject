@@ -31,6 +31,7 @@ namespace BlackJackView
             InitializeComponent();
             jack = new BlackJack();
             InitializePlayers(playerNamesInput, withHouse);
+            currentPlayer = jack.Players[0];
         }
 
         public void InitializePlayers(List<string> names, bool IsHousePlaying)
@@ -38,25 +39,27 @@ namespace BlackJackView
 
             for (int i = 0; i < names.Count; i++)
             {
-                Player player = new Player()
+                Human player = new Human()
                 {
                     Name = names[i],
                     Bank = 2000,
                 };
 
-                jack.Allplayers.Add(player);
+                jack.Players.Add(player);
             }
 
             if (IsHousePlaying)
             {
-                jack.Allplayers.Add(new House());
+                jack.Players.Add(new House());
             }
+
+            jack.StartNewTurn(20);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ugridPlayers.Columns = jack.Allplayers.Count;
-            for (int i = 0; i < jack.Allplayers.Count; i++)
+            ugridPlayers.Columns = jack.Players.Count;
+            for (int i = 0; i < jack.Players.Count; i++)
             {
                 Rectangle rectangle = new Rectangle();
                 rectangle.Fill = Brushes.Aquamarine;
@@ -64,7 +67,7 @@ namespace BlackJackView
                 border.Padding = new Thickness(5.0);
                 border.Child = rectangle;
                 ugridPlayers.Children.Add(border);
-                MessageBox.Show(jack.Allplayers[i].Name);
+                MessageBox.Show(jack.Players[i].Name);
             }
         }
 
@@ -72,7 +75,7 @@ namespace BlackJackView
         {
             if (!currentPlayer.HasBust && jack.CanDraw(currentPlayer))
             {
-                //Draw card jack.Deck
+                currentPlayer.CardsInHand.Add(jack.Deck.DrawCard());
                 currentPlayer.GetHandValue();
                 if (currentPlayer.HasBust || !jack.CanDraw(currentPlayer))
                 {
@@ -93,29 +96,22 @@ namespace BlackJackView
         private void PassTurn()
         {
             sequence++;
-            if (sequence >= jack.Allplayers.Count)
+            if (sequence >= jack.Players.Count)
             {
                 EndRound();
                 sequence = 0;
             }
-            currentPlayer = jack.Allplayers[sequence];
+            currentPlayer = jack.Players[sequence];
         }
 
         private void EndRound()
         {
-            List<Player> winners = jack.GetWinners();
-            foreach (var winner in winners)
-            {
-                winner.Bank += jack.Pool / winners.Count;
-            }
+            jack.GetWinners();
         }
 
         private void StartRound()
         {
-            foreach (var player in jack.Allplayers)
-            {
-                player.Bank -= 100;
-            }
+            jack.StartNewTurn(20);
         }
     }
 }
