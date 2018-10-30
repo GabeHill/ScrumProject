@@ -50,7 +50,6 @@ namespace CardGameFrameworkLibrary.Models
             }
         }
         public string Name { get; set; }
-        public int Bank { get; set; }
         public List<Card> CardsInHand { get; set; }
         public bool HasFolded { get; set; }
         public bool HasBust
