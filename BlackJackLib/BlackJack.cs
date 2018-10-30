@@ -12,7 +12,7 @@ namespace BlackJackLib
         public BlackJack()
         {
             Players = new List<Player>();
-            Deck = new Deck("Blackjack");
+            GameDeck = new Deck("Blackjack");
         }
 
         //Gets All the players that have no busted
@@ -69,7 +69,7 @@ namespace BlackJackLib
         //Give Players Their winnings
         public void EndTurn(List<Player> players)
         {
-            int winnings = Pool / players.Count;
+            int winnings = Pot / players.Count;
             foreach (var player in players)
             {
                 player.Bank += winnings;
@@ -81,7 +81,7 @@ namespace BlackJackLib
         {
             foreach (var player in Players)
             {
-                player.CardsInHand = (Deck.DealCards(2));
+                player.CardsInHand = (GameDeck.DealCards(2));
             }
         }
         public void PlaceBet(Player player,int bet)

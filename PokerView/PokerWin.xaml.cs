@@ -65,8 +65,7 @@ namespace PokerView
                     Image image = new Image()
                     {
                         Source = new BitmapImage(new Uri(card.ImageSource, UriKind.Absolute)),
-                        MaxHeight = 50,
-
+                        MaxHeight = 50
 
                     };
                     image.MouseDown += card.ToggleSelected;
@@ -121,9 +120,9 @@ namespace PokerView
         private void Discard()
         {
             List<Card> temp = new List<Card>();
+            temp.AddRange(CurrentPlayer.CardsInHand);
             foreach (Card card in CurrentPlayer.CardsInHand)
             {
-                temp.AddRange(CurrentPlayer.CardsInHand);
                 if (card.IsSelected)
                 {
                     temp.Remove(card);
@@ -134,12 +133,10 @@ namespace PokerView
 
         private void Drawing()
         {
-            while (CurrentPlayer.CardsInHand.Count <= 5)
+            while (CurrentPlayer.CardsInHand.Count < 5)
             {
                 CurrentPlayer.CardsInHand.Add(poker.GameDeck.DrawCard());
             }
-            //draw number of cards depending on number discarded(amount)
-            throw new NotImplementedException();
         }
 
         private bool IsBettingPhase()
@@ -227,6 +224,33 @@ namespace PokerView
                 {
                     textBox.Text = poker.MinimumBet.ToString();
                 }
+            }
+        }
+
+        private void btnDraw(object sender, MouseButtonEventArgs e)
+        {
+            Discard();
+            Drawing();
+            UpdateView();
+            //NextPlayer();
+        }
+
+        private void UpdateView()
+        {
+            PlayerTile tile = (PlayerTile)vb_CurrentPlayer.Child;
+            tile.sp_Cards.Children.Clear();
+            foreach (Card card in tile.player.CardsInHand)
+            {
+                Image image = new Image()
+                {
+                    Source = new BitmapImage(new Uri(card.ImageSource, UriKind.Absolute)),
+                    MaxHeight = 50
+
+                };
+                image.MouseDown += card.ToggleSelected;
+                image.MouseDown += ToggleOpacity;
+
+                tile.sp_Cards.Children.Add(image);
             }
         }
     }

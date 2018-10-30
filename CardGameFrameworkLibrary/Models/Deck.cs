@@ -117,7 +117,6 @@ namespace CardGameFrameworkLibrary.Models
                                 Rank = rankList[j],
                                 Value = (j + 2),
                                 IsSelected = false
-
                             };
                             if(card.Value > 10)
                             {

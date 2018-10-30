@@ -75,7 +75,7 @@ namespace BlackJackView
         {
             if (!currentPlayer.HasBust && jack.CanDraw(currentPlayer))
             {
-                currentPlayer.CardsInHand.Add(jack.Deck.DrawCard());
+                currentPlayer.CardsInHand.Add(jack.GameDeck.DrawCard());
                 currentPlayer.GetHandValue();
                 if (currentPlayer.HasBust || !jack.CanDraw(currentPlayer))
                 {
