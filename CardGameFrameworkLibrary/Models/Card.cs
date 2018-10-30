@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace CardGameFrameworkLibrary.Models
@@ -38,6 +40,8 @@ namespace CardGameFrameworkLibrary.Models
         public int Value { get; set; }
         public Rank Rank { get; set; }
         public string ImageSource { get; set; }
+        public bool Selected { get; set; }
+
 
 
 
@@ -51,5 +55,9 @@ namespace CardGameFrameworkLibrary.Models
             throw new Exception("Image source for this card is invalid");
         }
 
+        public void ToggleSelected(object sender, MouseEventArgs e)
+        {
+            Selected = !Selected;
+        }
     }
 }

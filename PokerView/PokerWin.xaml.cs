@@ -51,7 +51,6 @@ namespace PokerView
             foreach (PlayerTile player in dp_PlayerBench.Children)
             {
                 player.sp_Cards.Visibility = Visibility.Hidden;
-                player.sp_SelectCards.Visibility = Visibility.Hidden;
             }
             if (CurrentTile.player.Equals(poker.Dealer))
             {
@@ -63,14 +62,25 @@ namespace PokerView
             {
                 foreach (Card card in info.player.CardsInHand)
                 {
-                    info.sp_Cards.Children.Add(new Image()
+                    Image image = new Image()
                     {
                         Source = new BitmapImage(new Uri(card.ImageSource, UriKind.Absolute)),
-                        MaxHeight = 50
+                        MaxHeight = 50,
 
-                    });
+
+                    };
+                    image.MouseDown += card.ToggleSelected;
+                    image.MouseDown += ToggleOpacity;
+                    
+                    info.sp_Cards.Children.Add(image);
                 }
             }
+        }
+
+        private void ToggleOpacity(object sender, MouseButtonEventArgs e)
+        {
+            Image image = (Image)sender;
+            image.Opacity = image.Opacity == 1 ? 0.7 : 1;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -95,6 +105,11 @@ namespace PokerView
                 btnBet.IsEnabled = false;
                 btnFold.IsEnabled = false;
                 tbBet.IsEnabled = false;
+            }
+
+            if (FoldCount == poker.Players.Count)
+            {
+                throw new Exception("All players have folded and this needs to be handled");
             }
 
             if (CurrentPlayer.HasFolded)
@@ -144,9 +159,7 @@ namespace PokerView
             dp_PlayerBench.Children.Add(CurrentTile);
             vb_CurrentPlayer.Child = NextTile;
             CurrentTile.sp_Cards.Visibility = Visibility.Hidden;
-            CurrentTile.sp_SelectCards.Visibility = Visibility.Hidden;
             NextTile.sp_Cards.Visibility = Visibility.Visible;
-            NextTile.sp_SelectCards.Visibility = Visibility.Visible;
             CurrentPlayer = NextTile.player;
         }
 
@@ -154,6 +167,7 @@ namespace PokerView
         {
             CurrentPlayer.HasFolded = true;
             NextPlayer();
+            FoldCount++;
         }
 
         private void PlaceBet(object sender, RoutedEventArgs e)

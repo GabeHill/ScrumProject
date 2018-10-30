@@ -13,44 +13,6 @@
             <TextBlock Name="lbBet" Text="{Binding Bet, StringFormat=Bet: {0:C}}"></TextBlock>
             <StackPanel Name="sp_Cards" Orientation="Horizontal" Margin="30,0,0,0">
             </StackPanel>
-            <StackPanel Name="sp_SelectCards" Orientation="Horizontal">
-                <Label Content="Keep:" FontSize="8"></Label>
-                <CheckBox Name="card1" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
-                    <CheckBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
-                        </TransformGroup>
-                    </CheckBox.RenderTransform>
-                </CheckBox>
-                <CheckBox Name="card2" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
-                    <CheckBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
-                        </TransformGroup>
-                    </CheckBox.RenderTransform>
-                </CheckBox>
-                <CheckBox Name="card3" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
-                    <CheckBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
-                        </TransformGroup>
-                    </CheckBox.RenderTransform>
-                </CheckBox>
-                <CheckBox Name="card4" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
-                    <CheckBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
-                        </TransformGroup>
-                    </CheckBox.RenderTransform>
-                </CheckBox>
-                <CheckBox Name="card5" RenderTransformOrigin="0.5,0.5" Margin="10,0,6,0">
-                    <CheckBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
-                        </TransformGroup>
-                    </CheckBox.RenderTransform>
-                </CheckBox>
-            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
