@@ -20,10 +20,10 @@ namespace ScrumProject.User_Controls
     /// </summary>
     public partial class PlayerInfo : UserControl
     {
-        public PlayerInfo(int i)
+        public PlayerInfo(string name)
         {
             InitializeComponent();
-            lbName.Content = $"Player: {i}";
+            lbName.Content = $"{name}";
         }
     }
 }

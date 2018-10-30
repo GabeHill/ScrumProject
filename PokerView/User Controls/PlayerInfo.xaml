@@ -12,11 +12,11 @@
             <Label Name="lbPot" Content="Bank: $500"></Label>
             <Label Name="lbBet" Content="Bet: $20"></Label>
             <StackPanel Name="sp_Cards" Orientation="Horizontal">
-                <Image Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
-                <Image Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
-                <Image Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
-                <Image Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
-                <Image Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
+                <Image  Name="card1" Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
+                <Image Name="card2" Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
+                <Image Name="card3" Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
+                <Image Name="card4" Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
+                <Image Name="card5" Source="C:\Users\Bryan\source\repos\ScrumProject\CardGameFrameworkLibrary\Resource\CLUBEIGHT.png" MaxHeight="40"></Image>
             </StackPanel>
         </StackPanel>
     </Grid>

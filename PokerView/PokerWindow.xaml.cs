@@ -1,4 +1,5 @@
-﻿using ScrumProject.User_Controls;
+﻿using CardGameFrameworkLibrary.Models;
+using ScrumProject.User_Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,22 +21,46 @@ namespace ScrumProject
     /// </summary>
     public partial class PokerWindow : Window
     {
-        int players = 0;
+        private List<string> pokerNames;
+        private bool isChecked;
+        Deck deck;
+
         //PokerGameLogic game
 
-        public PokerWindow()
+        public PokerWindow(List<string> pokerNames, bool isChecked)
         {
+            this.pokerNames = pokerNames;
+            this.isChecked = isChecked;
             InitializeComponent();
+            GameSetup();
             PlayerInfoSetup();
+        }
+
+        private void GameSetup()
+        {
+            deck = new Deck("Poker");
+            deck.Shuffle();
 
         }
 
         private void PlayerInfoSetup()
         {
-            vb_CurrentPlayer.Child = new PlayerInfo(1);
-            for (int i = 1; i < players; i++)
+            PlayerInfo player1 = new PlayerInfo(pokerNames[0]);
+            player1.card1.Source = deck.DrawCard().GetImage();
+            player1.card2.Source = deck.DrawCard().GetImage();
+            player1.card3.Source = deck.DrawCard().GetImage();
+            player1.card4.Source = deck.DrawCard().GetImage();
+            player1.card5.Source = deck.DrawCard().GetImage();
+            vb_CurrentPlayer.Child = player1;
+            for (int i = 1; i < pokerNames.Count; i++)
             {
-                dp_PlayerBench.Children.Add(new PlayerInfo(i + 1));
+                PlayerInfo nextPlayer = new PlayerInfo(pokerNames[i]);
+                nextPlayer.card1.Source = deck.DrawCard().GetImage();
+                nextPlayer.card2.Source = deck.DrawCard().GetImage();
+                nextPlayer.card3.Source = deck.DrawCard().GetImage();
+                nextPlayer.card4.Source = deck.DrawCard().GetImage();
+                nextPlayer.card5.Source = deck.DrawCard().GetImage();
+                dp_PlayerBench.Children.Add(nextPlayer);
             }
             foreach (PlayerInfo player in dp_PlayerBench.Children)
             {
