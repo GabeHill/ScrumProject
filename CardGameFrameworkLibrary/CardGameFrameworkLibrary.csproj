@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +50,60 @@
     <Compile Include="Models\Human.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resource\CLUBACE.png" />
+    <Content Include="Resource\CLUBEIGHT.png" />
+    <Content Include="Resource\CLUBFIVE.png" />
+    <Content Include="Resource\CLUBFOUR.png" />
+    <Content Include="Resource\CLUBJACK.png" />
+    <Content Include="Resource\CLUBKING.png" />
+    <Content Include="Resource\CLUBNINE.png" />
+    <Content Include="Resource\CLUBQUEEN.png" />
+    <Content Include="Resource\CLUBSEVEN.png" />
+    <Content Include="Resource\CLUBSIX.png" />
+    <Content Include="Resource\CLUBTEN.png" />
+    <Content Include="Resource\CLUBTHREE.png" />
+    <Content Include="Resource\CLUBTWO.png" />
+    <Content Include="Resource\DIAMONDACE.png" />
+    <Content Include="Resource\DIAMONDEIGHT.png" />
+    <Content Include="Resource\DIAMONDFIVE.png" />
+    <Content Include="Resource\DIAMONDFOUR.png" />
+    <Content Include="Resource\DIAMONDJACK.png" />
+    <Content Include="Resource\DIAMONDKING.png" />
+    <Content Include="Resource\DIAMONDNINE.png" />
+    <Content Include="Resource\DIAMONDQUEEN.png" />
+    <Content Include="Resource\DIAMONDSEVEN.png" />
+    <Content Include="Resource\DIAMONDSIX.png" />
+    <Content Include="Resource\DIAMONDTEN.png" />
+    <Content Include="Resource\DIAMONDTHREE.png" />
+    <Content Include="Resource\DIAMONDTWO.png" />
+    <Content Include="Resource\HEARTACE.png" />
+    <Content Include="Resource\HEARTEIGHT.png" />
+    <Content Include="Resource\HEARTFIVE.png" />
+    <Content Include="Resource\HEARTFOUR.png" />
+    <Content Include="Resource\HEARTJACK.png" />
+    <Content Include="Resource\HEARTKING.png" />
+    <Content Include="Resource\HEARTNINE.png" />
+    <Content Include="Resource\HEARTQUEEN.png" />
+    <Content Include="Resource\HEARTSEVEN.png" />
+    <Content Include="Resource\HEARTSIX.png" />
+    <Content Include="Resource\HEARTTEN.png" />
+    <Content Include="Resource\HEARTTHREE.png" />
+    <Content Include="Resource\HEARTTWO.png" />
+    <Content Include="Resource\SPADEACE.png" />
+    <Content Include="Resource\SPADEEIGHT.png" />
+    <Content Include="Resource\SPADEFIVE.png" />
+    <Content Include="Resource\SPADEFOUR.png" />
+    <Content Include="Resource\SPADEJACK.png" />
+    <Content Include="Resource\SPADEKING.png" />
+    <Content Include="Resource\SPADENINE.png" />
+    <Content Include="Resource\SPADEQUEEN.png" />
+    <Content Include="Resource\SPADESEVEN.png" />
+    <Content Include="Resource\SPADESIX.png" />
+    <Content Include="Resource\SPADETEN.png" />
+    <Content Include="Resource\SPADETHREE.png" />
+    <Content Include="Resource\SPADETWO.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

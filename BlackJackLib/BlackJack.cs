@@ -9,8 +9,20 @@ namespace BlackJackLib
 {
     public class BlackJack: Game
     {
+        public BlackJack()
+        {
+            Allplayers = new List<Player>();
+            Deck = new Deck("Blackjack");
+        }
+        //List of all  players Including House
+        public List<Player> Allplayers { get; set; }
+        //Current Deck
+        public Deck Deck { get; set; }
+        //Amount of somone could win
+        public int Pool { get; set; }
+
         //Gets All the players that have no busted
-        private void GetWinners()
+        public List<Player> GetWinners()
         {
             List<Player> contenders = new List<Player>();
 
@@ -22,32 +34,32 @@ namespace BlackJackLib
                 }
             }
             CheckHighest(contenders);
+
+            return contenders;
         }
         //Grabs the highest hand value of all players
         private int GetHighestNumber(List<Player> players)
         {
-            int high = 1;
+            int highestHigh = GetHighestHigh(players);
+            Remove(highestHigh, players);
+        }
+
+        private int GetHighestHigh(List<Player> players)
+        {
+            int high = 2;
             foreach (var player in players)
             {
+                player.GetHandValue();
                 if (player.HandValue > high)
                 {
                     high = player.HandValue;
                 }
-            }
-            return high;
-        }
-        //Remove all players who have a lower hand value than a given int
-        private void CheckHighest(List<Player> players)
-        {
-            int high = GetHighestNumber(players);
-            foreach (var player in players)
-            {
-                if (player.HandValue < high)
+                if (high == 21)
                 {
-                    players.Remove(player);
-                    break;
+                    return high;
                 }
             }
+            return high;
         }
 
         //Give Players Their winnings

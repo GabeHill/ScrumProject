@@ -10,9 +10,23 @@ namespace CardGameFrameworkLibrary.Models
     {
         public List<Card> CardsInHand { get; set; }
         public bool HasFolded { get; set; }
-        public bool HasBust { get; set; }
-        public int Bank { get; set; }
+        public bool HasBust
+        {
+            get { return Bust(); }
+        }
         public int HandValue { get; set; }
+
+        private bool Bust()
+        {
+            GetHandValue();
+            if (HandValue > 21)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void GetHandValue()
         //if bet is larger than their bank they go all  in
         public void PlaceBet(int amount)
         {
@@ -25,7 +39,7 @@ namespace CardGameFrameworkLibrary.Models
         //Getter: Gets the hand value for blackJack
         public int GetHandValue()
         {
-            int total = 0;
+            HandValue = 0;
             foreach (var card in CardsInHand)
             {
                 total += card.Value;
