@@ -40,7 +40,7 @@ namespace CardGameFrameworkLibrary.Models
         public Rank Rank { get; set; }
         public int Value { get; set; }
         public string ImageSource { get; set; }
-        public bool Selected { get; set; }
+        public bool IsSelected { get; set; }
 
 
 
@@ -57,7 +57,7 @@ namespace CardGameFrameworkLibrary.Models
 
         public void ToggleSelected(object sender, MouseEventArgs e)
         {
-            Selected = !Selected;
+            IsSelected = !IsSelected;
         }
     }
 }

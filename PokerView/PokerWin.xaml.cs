@@ -124,7 +124,7 @@ namespace PokerView
             foreach (Card card in CurrentPlayer.CardsInHand)
             {
                 temp.AddRange(CurrentPlayer.CardsInHand);
-                if (!card.IsKept)
+                if (card.IsSelected)
                 {
                     temp.Remove(card);
                 }

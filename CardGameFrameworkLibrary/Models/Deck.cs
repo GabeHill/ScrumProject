@@ -105,7 +105,8 @@ namespace CardGameFrameworkLibrary.Models
                             {
                                 Suit = suitList[color],
                                 Rank = rankList[j],
-                                Value = (j + 2)
+                                Value = (j + 2),
+                                IsSelected = false
 
                             };
                             break;
@@ -114,7 +115,8 @@ namespace CardGameFrameworkLibrary.Models
                             {
                                 Suit = suitList[color],
                                 Rank = rankList[j],
-                                Value = (j + 2)
+                                Value = (j + 2),
+                                IsSelected = false
 
                             };
                             if(card.Value > 10)
