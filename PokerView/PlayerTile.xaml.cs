@@ -14,15 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ScrumProject.User_Controls
+namespace PokerView
 {
     /// <summary>
-    /// Interaction logic for PlayerInfo.xaml
+    /// Interaction logic for PlayerTile.xaml
     /// </summary>
-    public partial class PlayerInfo : UserControl
+    public partial class PlayerTile : UserControl
     {
         public Player player;
-        public PlayerInfo(Player player)
+        public PlayerTile(Player player)
         {
             this.player = player;
             DataContext = player;

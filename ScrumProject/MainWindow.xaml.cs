@@ -1,5 +1,6 @@
 ﻿using CardGameFrameworkLibrary.Models;
 using Poker.Controller;
+using PokerView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace ScrumProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        PokerView.PokerWindow PokerWindow;
+        PokerWin PokerView;
         public MainWindow()
         {
             InitializeComponent();
@@ -54,9 +55,9 @@ namespace ScrumProject
                             CardsInHand = new List<Card>()
                         });
                     }
-                    PokerWindow = new PokerWindow(poker);
+                    PokerView = new PokerView.PokerWin(poker);
 
-                    PokerWindow.Show();
+                    PokerView.Show();
                     Close();
                     break;
                 case "Blackjack":

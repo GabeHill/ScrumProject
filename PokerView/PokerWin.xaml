@@ -1,11 +1,11 @@
-﻿<Window x:Class="ScrumProject.PokerWindow"
+﻿<Window x:Class="PokerView.PokerWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ScrumProject"
+        xmlns:local="clr-namespace:PokerView"
         mc:Ignorable="d"
-        Title="PokerWindow" Height="450" Width="800">
+        Title="PokerView" Height="450" Width="800">
     <Grid Background="ForestGreen">
         <Grid.RowDefinitions>
             <RowDefinition Height="120"></RowDefinition>
@@ -16,10 +16,10 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border BorderThickness="1" BorderBrush="DarkSeaGreen" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
-        <DockPanel Name="dp_PlayerBench" Height="110" Width="800" LastChildFill="False"></DockPanel>
+            <DockPanel Name="dp_PlayerBench" Height="110" Width="800" LastChildFill="False"></DockPanel>
         </Border>
         <Border BorderThickness="1" BorderBrush="DarkSeaGreen" Grid.Column="1" Grid.Row="1">
-        <Viewbox Name="vb_CurrentPlayer"></Viewbox>
+            <Viewbox Name="vb_CurrentPlayer"></Viewbox>
         </Border>
         <Border BorderThickness="1" BorderBrush="DarkSeaGreen" Grid.Row="1">
             <Button Content="Button" Grid.Row="1" VerticalAlignment="Center" Width="75" Click="Button_Click"/>

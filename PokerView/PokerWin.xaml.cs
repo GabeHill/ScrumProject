@@ -1,4 +1,5 @@
-﻿using ScrumProject.User_Controls;
+﻿using CardGameFrameworkLibrary.Models;
+using Poker.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,20 +13,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Poker.Controller;
-using CardGameFrameworkLibrary.Models;
 
-namespace ScrumProject
+namespace PokerView
 {
     /// <summary>
-    /// Interaction logic for PokerWindow.xaml
+    /// Interaction logic for PokerView.xaml
     /// </summary>
-    public partial class PokerWindow : Window
+    public partial class PokerWin : Window
     {
         PokerLogic poker;
-        List<PlayerInfo> PlayerInfoTiles = new List<PlayerInfo>();
+        List<PlayerTile> PlayerInfoTiles = new List<PlayerTile>();
 
-        public PokerWindow(PokerLogic pokerLogic)
+        public PokerWin(PokerLogic pokerLogic)
         {
             InitializeComponent();
             poker = pokerLogic;
@@ -36,23 +35,23 @@ namespace ScrumProject
         private void PlayerInfoSetup()
         {
 
-            PlayerInfo CurrentPlayer = new PlayerInfo(poker.Players[0]);
+            PlayerTile CurrentPlayer = new PlayerTile(poker.Players[0]);
             PlayerInfoTiles.Add(CurrentPlayer);
             vb_CurrentPlayer.Child = CurrentPlayer;
             for (int i = 1; i < poker.Players.Count; i++)
             {
-                PlayerInfo NextPlayer = new PlayerInfo(poker.Players[i]);
+                PlayerTile NextPlayer = new PlayerTile(poker.Players[i]);
                 PlayerInfoTiles.Add(NextPlayer);
                 dp_PlayerBench.Children.Add(NextPlayer);
             }
-            foreach (PlayerInfo player in dp_PlayerBench.Children)
+            foreach (PlayerTile player in dp_PlayerBench.Children)
             {
                 player.sp_Cards.Visibility = Visibility.Hidden;
             }
             NextPlayer();
             poker.Deal();
 
-            foreach (PlayerInfo info in PlayerInfoTiles)
+            foreach (PlayerTile info in PlayerInfoTiles)
             {
                 foreach (Card card in info.player.CardsInHand)
                 {
@@ -73,8 +72,8 @@ namespace ScrumProject
 
         private void NextPlayer()
         {
-            PlayerInfo CurrentPlayer = (PlayerInfo)vb_CurrentPlayer.Child;
-            PlayerInfo NextPlayer = (PlayerInfo)dp_PlayerBench.Children[0];
+            PlayerTile CurrentPlayer = (PlayerTile)vb_CurrentPlayer.Child;
+            PlayerTile NextPlayer = (PlayerTile)dp_PlayerBench.Children[0];
             dp_PlayerBench.Children.Remove(NextPlayer);
             vb_CurrentPlayer.Child = null;
             dp_PlayerBench.Children.Add(CurrentPlayer);

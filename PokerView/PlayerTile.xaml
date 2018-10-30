@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="ScrumProject.User_Controls.PlayerInfo"
+﻿<UserControl x:Class="PokerView.PlayerTile"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ScrumProject.User_Controls"
+             xmlns:local="clr-namespace:PokerView"
              mc:Ignorable="d" 
-             d:DesignHeight="120" d:DesignWidth="166.295">
+             d:DesignHeight="120" d:DesignWidth="190">
     <Grid>
         <StackPanel>
             <TextBlock Name="lbName" Text="{Binding Name}"></TextBlock>

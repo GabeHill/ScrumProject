@@ -61,11 +61,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlayerInfo.xaml.cs">
-      <DependentUpon>PlayerInfo.xaml</DependentUpon>
+    <Compile Include="PlayerTile.xaml.cs">
+      <DependentUpon>PlayerTile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PokerWindow.xaml.cs">
-      <DependentUpon>PokerWindow.xaml</DependentUpon>
+    <Compile Include="PokerWin.xaml.cs">
+      <DependentUpon>PokerWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -93,13 +93,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="PlayerInfo.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="PlayerTile.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PokerWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="PokerWin.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

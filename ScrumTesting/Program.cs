@@ -12,8 +12,8 @@ namespace ScrumTesting
     {
         static void Main(string[] args)
         {
-            PokerLogic pl = new PokerLogic();
-            pl.Setup();
+            PokerLogic pl = new PokerLogic(false);
+            //pl.Setup();
         }
     }
 }
