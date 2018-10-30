@@ -52,11 +52,7 @@ namespace CardGameFrameworkLibrary.Models
             List<Card> DealtCards = new List<Card>();
             for (int i = 0; i < amount; i++)
             {
-                DealtCards.Add(Cards[Cards.Count - 1]);
-            }
-            foreach (Card card in DealtCards)
-            {
-                Cards.Remove(card);
+                DealtCards.Add(DrawCard());
             }
             return DealtCards;
         }
