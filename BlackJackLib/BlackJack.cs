@@ -7,26 +7,20 @@ using CardGameFrameworkLibrary.Models;
 
 namespace BlackJackLib
 {
-    public class BlackJack
+    public class BlackJack: Game
     {
         public BlackJack()
         {
-            Allplayers = new List<Player>();
+            Players = new List<Player>();
             Deck = new Deck("Blackjack");
         }
-        //List of all  players Including House
-        public List<Player> Allplayers { get; set; }
-        //Current Deck
-        public Deck Deck { get; set; }
-        //Amount of somone could win
-        public int Pool { get; set; }
 
         //Gets All the players that have no busted
-        public List<Player> GetWinners()
+        public void GetWinners()
         {
             List<Player> contenders = new List<Player>();
 
-            foreach (var player in Allplayers)
+            foreach (var player in Players)
             {
                 if (!player.HasBust)
                 {
@@ -34,14 +28,25 @@ namespace BlackJackLib
                 }
             }
             CheckHighest(contenders);
-
-            return contenders;
+            EndTurn(contenders);
         }
-        //Grab all the players who 
+        //Grabs the highest hand value of all players
         private void CheckHighest(List<Player> players)
         {
             int highestHigh = GetHighestHigh(players);
             Remove(highestHigh, players);
+        }
+
+        private void Remove(int highestHigh, List<Player> players)
+        {
+            foreach (var player in players)
+            {
+                if (player.GetHandValue() < highestHigh)
+                {
+                    players.Remove(player);
+                    break;
+                }
+            }
         }
 
         private int GetHighestHigh(List<Player> players)
@@ -49,8 +54,7 @@ namespace BlackJackLib
             int high = 2;
             foreach (var player in players)
             {
-                player.GetHandValue();
-                if (player.HandValue > high)
+                if (player.GetHandValue() > high)
                 {
                     high = player.HandValue;
                 }
@@ -62,20 +66,27 @@ namespace BlackJackLib
             return high;
         }
 
-        //Removes player if lower than the highest number
-        public void Remove(int high, List<Player> players)
+        //Give Players Their winnings
+        public void EndTurn(List<Player> players)
         {
+            int winnings = Pool / players.Count;
             foreach (var player in players)
             {
-                if (players.Count > 1)
-                {
-                    if (player.HandValue < high)
-                    {
-                        players.Remove(player);
-                        break;
-                    }
-                }
+                player.Bank += winnings;
             }
+        }
+
+        //Players Place Bet and receive new cards
+        public void StartNewTurn(int bet)
+        {
+            foreach (var player in Players)
+            {
+                player.CardsInHand = (Deck.DealCards(2));
+            }
+        }
+        public void PlaceBet(Player player,int bet)
+        {
+            player.PlaceBet(bet);
         }
 
         //Does a player have less than five Cards in Hand
