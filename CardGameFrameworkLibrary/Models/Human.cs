@@ -8,6 +8,5 @@ namespace CardGameFrameworkLibrary.Models
 {
     public class Human: Player
     {
-        public string Name { get; set; }
     }
 }

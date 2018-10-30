@@ -31,6 +31,7 @@ namespace BlackJackView
             InitializeComponent();
             jack = new BlackJack();
             InitializePlayers(playerNamesInput, withHouse);
+            currentPlayer = jack.Players[0];
         }
 
         public void InitializePlayers(List<string> names, bool IsHousePlaying)
@@ -51,6 +52,8 @@ namespace BlackJackView
             {
                 jack.Players.Add(new House());
             }
+
+            jack.StartNewTurn(20);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
