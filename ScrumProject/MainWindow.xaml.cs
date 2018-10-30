@@ -46,6 +46,7 @@ namespace ScrumProject
                         pokerNames.Add(name.Text);
                     }
                     PokerWindow pokerWindow = new PokerWindow(pokerNames, (bool)pokerSettings.cbxWithHouse.IsChecked);
+
                     pokerWindow.Show();
                     Close();
                     break;

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\netstandard2.0\DCorum_CIO.dll" />
+    <None Include="bin\Debug\netstandard2.0\DCorum_CIO.dll.config" />
+    <None Include="bin\Debug\netstandard2.0\DCorum_CIO.pdb" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CardGameFrameworkLibrary\CardGameFrameworkLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DCorum_CIO">
+      <HintPath>..\..\ConsoleIOTest\ConsoleIOTest\bin\Debug\DCorum_CIO.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
