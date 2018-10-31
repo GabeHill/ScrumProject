@@ -37,25 +37,25 @@ namespace ScrumProject
             cmbxPlayerCount.ItemsSource = playersWithoutHouse;
         }
 
-        private void cbxWithHouse_CheckChanged(object sender, RoutedEventArgs e)
-        {
-            if (cbxWithHouse.IsChecked.Value)
-            {
-                if ((int)cmbxPlayerCount.SelectedItem == 6)
-                {
-                    cmbxPlayerCount.SelectedItem = 5;
-                }
-                cmbxPlayerCount.ItemsSource = playersWithHouse;
-            }
-            if (!cbxWithHouse.IsChecked.Value)
-            {
-                if ((int)cmbxPlayerCount.SelectedItem == 1)
-                {
-                    cmbxPlayerCount.SelectedItem = 2;
-                }
-                cmbxPlayerCount.ItemsSource = playersWithoutHouse;
-            }
-        }
+        //private void cbxWithHouse_CheckChanged(object sender, RoutedEventArgs e)
+        //{
+        //    if (cbxWithHouse.IsChecked.Value)
+        //    {
+        //        if ((int)cmbxPlayerCount.SelectedItem == 6)
+        //        {
+        //            cmbxPlayerCount.SelectedItem = 5;
+        //        }
+        //        cmbxPlayerCount.ItemsSource = playersWithHouse;
+        //    }
+        //    if (!cbxWithHouse.IsChecked.Value)
+        //    {
+        //        if ((int)cmbxPlayerCount.SelectedItem == 1)
+        //        {
+        //            cmbxPlayerCount.SelectedItem = 2;
+        //        }
+        //        cmbxPlayerCount.ItemsSource = playersWithoutHouse;
+        //    }
+        //}
 
         private void cmbxPlayerCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
