@@ -8,6 +8,7 @@ namespace Poker.Controller
 {
     public class PokerLogic : Game
     {
+        private readonly int BUY_IN = 5;
         public PokerLogic(bool? isChecked)
         {
             SetUp(isChecked);
@@ -28,12 +29,12 @@ namespace Poker.Controller
                 Players.Add(house);
                 Dealer = house;
             }
-            MinimumBet = 1;
-            Phase = Phases.FIRSTBETTING;
+            
         }
 
         public void Deal()
         {
+            Phase = Phases.FIRSTBETTING;
             GameDeck = new Deck("Poker");
             GameDeck.Shuffle();
             for (int i = 0; i < 5; i++)
@@ -43,7 +44,22 @@ namespace Poker.Controller
                     player.CardsInHand.Add(GameDeck.DrawCard());
                 }
             }
+            ResetBetting();
+            CollectBuyIn();
         }
+
+        private void CollectBuyIn()
+        {
+            foreach (Player player in Players)
+            {
+                if(player.GetType() != typeof(House))
+                {
+                    player.Bank -= BUY_IN;
+                    Pot += BUY_IN;
+                }
+            }
+        }
+
         public void SetBet(Player currentPlayer, int bet)
         {
             if (bet > MinimumBet)
@@ -53,8 +69,6 @@ namespace Poker.Controller
             }
 
             currentPlayer.Bet = bet;
-            Pot += bet;
-            currentPlayer.Bank -= bet;
         }
 
         //iterate through all the players to check their hands
@@ -122,7 +136,7 @@ namespace Poker.Controller
         public void ResetBetting()
         {
             RaisingPlayer = null;
-            MinimumBet = 1;
+            MinimumBet = 0;
         }
 
         #region High
@@ -157,6 +171,9 @@ namespace Poker.Controller
             List<Player> winners = new List<Player>();
             foreach (Player player in Players)
             {
+                Pot += player.Bet;
+                player.Bank -= player.Bet;
+                player.Bet = 0;
                 if(player.HandValue > HighestValue)
                 {
                     HighestValue = player.HandValue;
@@ -187,8 +204,9 @@ namespace Poker.Controller
                 }
                 
             }
-
-            return winners[0];
+            Player winner = winners[0];
+            winner.Bank += Pot;
+            return winner;
         }
 
         public int HighCard()

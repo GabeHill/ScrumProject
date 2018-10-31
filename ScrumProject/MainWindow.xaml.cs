@@ -51,7 +51,7 @@ namespace ScrumProject
                         poker.Players.Add(new Player()
                         {
                             Name = name.Text,
-                            Bank = 500,
+                            Bank = 100,
                             CardsInHand = new List<Card>()
                         });
                     }

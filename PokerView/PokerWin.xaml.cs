@@ -25,7 +25,8 @@ namespace PokerView
         List<PlayerTile> PlayerInfoTiles = new List<PlayerTile>();
         Player CurrentPlayer;
         Player Winner;
-        private int FoldCount;
+        private int FoldCount = 0;
+        private int CheckCounter = 0;
 
         public PokerWin(PokerLogic pokerLogic)
         {
@@ -70,7 +71,7 @@ namespace PokerView
                     };
                     image.MouseDown += card.ToggleSelected;
                     image.MouseDown += ToggleOpacity;
-                    
+
                     info.sp_Cards.Children.Add(image);
                 }
             }
@@ -84,8 +85,12 @@ namespace PokerView
 
         private void btn_Check(object sender, RoutedEventArgs e)
         {
-            poker.RaisingPlayer = CurrentPlayer;
+            if (CheckCounter == 0)
+            {
+                poker.RaisingPlayer = CurrentPlayer;
+            }
             NextPlayer();
+            CheckCounter++;
         }
 
         private void NextPlayer()
@@ -109,10 +114,10 @@ namespace PokerView
                 tbBet.IsEnabled = false;
                 imgDeck.Opacity = 1;
                 imgDeck.IsEnabled = true;
-                
+
             }
 
-            if(poker.Phase == Phases.END)
+            if (poker.Phase == Phases.END)
             {
                 EndGame();
             }
@@ -132,11 +137,11 @@ namespace PokerView
         {
             poker.CheckForWinningHand();
             Winner = poker.FindWinner();
-            Winner.Bank += poker.Pot;
             MessageBoxResult result = MessageBox.Show($"{Winner.Name} wins! Play another hand?", "Hand Over", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 newHand();
+                Winner = null;
             }
             else
             {
@@ -150,8 +155,11 @@ namespace PokerView
             {
                 player.Bet = 0;
                 player.CardsInHand.Clear();
+                lbPhase.Content = "Betting";
+                CheckCounter = 0;
             }
             poker.Deal();
+            UpdateView();
         }
 
         private void Discard()
@@ -182,6 +190,8 @@ namespace PokerView
             {
                 poker.ResetBetting();
                 poker.Phase = Phases.SECONDBETTING;
+                lbPhase.Content = "Betting";
+                CheckCounter = 0;
                 return true;
             }
             return false;
@@ -189,7 +199,7 @@ namespace PokerView
 
         private bool IsDrawingPhase()
         {
-            if(CurrentPlayer.Equals(poker.RaisingPlayer) && poker.Phase == Phases.SECONDBETTING)
+            if (CurrentPlayer.Equals(poker.RaisingPlayer) && poker.Phase == Phases.SECONDBETTING)
             {
                 poker.Phase = Phases.END;
                 return false;
@@ -197,6 +207,7 @@ namespace PokerView
             if (CurrentPlayer.Equals(poker.RaisingPlayer) || poker.Phase == Phases.DRAWING)
             {
                 poker.Phase = Phases.DRAWING;
+                lbPhase.Content = "Drawing";
                 return true;
             }
             return false;
