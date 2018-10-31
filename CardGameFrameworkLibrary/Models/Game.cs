@@ -19,7 +19,9 @@ namespace CardGameFrameworkLibrary.Models
 
     public enum Phases
     {
-        BETTING,
-        DRAWING
+        FIRSTBETTING,
+        DRAWING,
+        SECONDBETTING,
+        END
     }
 }

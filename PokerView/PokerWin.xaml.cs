@@ -24,6 +24,7 @@ namespace PokerView
         PokerLogic poker;
         List<PlayerTile> PlayerInfoTiles = new List<PlayerTile>();
         Player CurrentPlayer;
+        Player Winner;
         private int FoldCount;
 
         public PokerWin(PokerLogic pokerLogic)
@@ -66,7 +67,6 @@ namespace PokerView
                     {
                         Source = new BitmapImage(new Uri(card.ImageSource, UriKind.Absolute)),
                         MaxHeight = 50
-
                     };
                     image.MouseDown += card.ToggleSelected;
                     image.MouseDown += ToggleOpacity;
@@ -82,8 +82,9 @@ namespace PokerView
             image.Opacity = image.Opacity == 1 ? 0.7 : 1;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btn_Check(object sender, RoutedEventArgs e)
         {
+            poker.RaisingPlayer = CurrentPlayer;
             NextPlayer();
         }
 
@@ -97,6 +98,8 @@ namespace PokerView
                 btnBet.IsEnabled = true;
                 btnFold.IsEnabled = true;
                 tbBet.IsEnabled = true;
+                imgDeck.Opacity = 0.5;
+                imgDeck.IsEnabled = false;
             }
             if (IsDrawingPhase())
             {
@@ -104,6 +107,14 @@ namespace PokerView
                 btnBet.IsEnabled = false;
                 btnFold.IsEnabled = false;
                 tbBet.IsEnabled = false;
+                imgDeck.Opacity = 1;
+                imgDeck.IsEnabled = true;
+                
+            }
+
+            if(poker.Phase == Phases.END)
+            {
+                EndGame();
             }
 
             if (FoldCount == poker.Players.Count)
@@ -115,6 +126,32 @@ namespace PokerView
             {
                 NextPlayer();
             }
+        }
+
+        private void EndGame()
+        {
+            poker.CheckForWinningHand();
+            Winner = poker.FindWinner();
+            Winner.Bank += poker.Pot;
+            MessageBoxResult result = MessageBox.Show($"{Winner.Name} wins! Play another hand?", "Hand Over", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                newHand();
+            }
+            else
+            {
+                Close();
+            }
+        }
+
+        private void newHand()
+        {
+            foreach (Player player in poker.Players)
+            {
+                player.Bet = 0;
+                player.CardsInHand.Clear();
+            }
+            poker.Deal();
         }
 
         private void Discard()
@@ -143,7 +180,8 @@ namespace PokerView
         {
             if (CurrentPlayer.Equals(poker.RaisingPlayer) && poker.Phase == Phases.DRAWING)
             {
-                poker.Phase = Phases.BETTING;
+                poker.ResetBetting();
+                poker.Phase = Phases.SECONDBETTING;
                 return true;
             }
             return false;
@@ -151,6 +189,11 @@ namespace PokerView
 
         private bool IsDrawingPhase()
         {
+            if(CurrentPlayer.Equals(poker.RaisingPlayer) && poker.Phase == Phases.SECONDBETTING)
+            {
+                poker.Phase = Phases.END;
+                return false;
+            }
             if (CurrentPlayer.Equals(poker.RaisingPlayer) || poker.Phase == Phases.DRAWING)
             {
                 poker.Phase = Phases.DRAWING;
@@ -186,6 +229,8 @@ namespace PokerView
 
         private void Fold(object sender, RoutedEventArgs e)
         {
+            CurrentPlayer.Bet = 0;
+            CurrentPlayer.HandValue = 0;
             CurrentPlayer.HasFolded = true;
             NextPlayer();
             FoldCount++;
@@ -193,19 +238,9 @@ namespace PokerView
 
         private void PlaceBet(object sender, RoutedEventArgs e)
         {
-
             int bet = int.Parse(tbBet.Text);
             poker.SetBet(CurrentPlayer, bet);
             NextPlayer();
-
-        }
-
-
-
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Grid grid = (Grid)sender;
-            grid.Focus();
         }
 
         private void tbBet_LostFocus(object sender, MouseEventArgs e)
@@ -232,7 +267,7 @@ namespace PokerView
             Discard();
             Drawing();
             UpdateView();
-            //NextPlayer();
+            NextPlayer();
         }
 
         private void UpdateView()

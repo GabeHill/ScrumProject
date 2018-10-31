@@ -22,11 +22,13 @@
             <Viewbox Name="vb_CurrentPlayer"></Viewbox>
         </Border>
         <Button Name="btnBet" Content="Place Bet" Grid.Row="1" VerticalAlignment="Center" Width="75" Click="PlaceBet"></Button>
-        <Button Name="btnCheck" Content="Check" Grid.Row="1" VerticalAlignment="Center" Margin="0,50,0,0" Width="75" Click="Button_Click"/>
+        <Button Name="btnCheck" Content="Check" Grid.Row="1" VerticalAlignment="Center" Margin="0,50,0,0" Width="75" Click="btn_Check"/>
         <Button Name="btnFold" Content="Fold" Grid.Row="1" VerticalAlignment="Center" Margin="0,100,0,0" Width="75" Click="Fold"/>
         <Label Content="Bet:" Grid.Row="1" VerticalAlignment="Center" Margin="50,0,0,75"></Label>
         <TextBox Name="tbBet" Grid.ColumnSpan="1" Height="23" Margin="40,0,0,75" Grid.Row="1" Text="1" VerticalAlignment="Center" Width="30" MouseMove="tbBet_LostFocus"/>
-        <Image Source="pack://application:,,,/CardGameFrameworkLibrary;component/Resource/CARDBACK.png" Grid.Row="1" Margin="0,220,0,0" MaxHeight="100px" RenderTransformOrigin="0.5,0.5" MouseDown="btnDraw">
+        <Image Name="imgDeck" Source="pack://application:,,,/CardGameFrameworkLibrary;component/Resource/CARDBACK.png" 
+               Grid.Row="1" Margin="0,220,0,0" MaxHeight="100px" RenderTransformOrigin="0.5,0.5" MouseDown="btnDraw"
+               Opacity="0.5" IsEnabled="False">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

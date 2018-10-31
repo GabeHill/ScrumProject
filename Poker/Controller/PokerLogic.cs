@@ -28,8 +28,8 @@ namespace Poker.Controller
                 Players.Add(house);
                 Dealer = house;
             }
-            MinimumBet = 0;
-            Phase = Phases.BETTING;
+            MinimumBet = 1;
+            Phase = Phases.FIRSTBETTING;
         }
 
         public void Deal()
@@ -46,13 +46,15 @@ namespace Poker.Controller
         }
         public void SetBet(Player currentPlayer, int bet)
         {
-            if(bet > MinimumBet)
-            currentPlayer.Bet = bet;
+            if (bet > MinimumBet)
             {
                 RaisingPlayer = currentPlayer;
                 MinimumBet = bet;
             }
 
+            currentPlayer.Bet = bet;
+            Pot += bet;
+            currentPlayer.Bank -= bet;
         }
 
         //iterate through all the players to check their hands
@@ -117,6 +119,12 @@ namespace Poker.Controller
             }
         }
 
+        public void ResetBetting()
+        {
+            RaisingPlayer = null;
+            MinimumBet = 1;
+        }
+
         #region High
         //in case of everyone having only a high return all players who have the highest card
         public List<Player> GetHighestWinners()
@@ -141,6 +149,46 @@ namespace Poker.Controller
                 }
             }
             return winners;
+        }
+
+        public Player FindWinner()
+        {
+            int HighestValue = 1;
+            List<Player> winners = new List<Player>();
+            foreach (Player player in Players)
+            {
+                if(player.HandValue > HighestValue)
+                {
+                    HighestValue = player.HandValue;
+                }
+            }
+
+            foreach (Player player in Players)
+            {
+                if(player.HandValue == HighestValue)
+                {
+                    winners.Add(player);
+                }
+            }
+            while(winners.Count > 1)
+            {
+                winners = GetHighestWinners();
+                if(winners.Count > 1)
+                {
+                    foreach (Player player in Players)
+                    {
+                        player.CardsInHand.Sort((x, y) => x.Rank.CompareTo(y.Rank));
+                        player.CardsInHand.RemoveAt(player.CardsInHand.Count - 1);
+                        if(player.CardsInHand.Count == 0)
+                        {
+                            throw new Exception("Somehow, the winning players had the exact same card values. I don't know what the odds of that are, and I don't know how to handle that really.");
+                        }
+                    }
+                }
+                
+            }
+
+            return winners[0];
         }
 
         public int HighCard()
