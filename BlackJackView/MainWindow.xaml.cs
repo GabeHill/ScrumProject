@@ -39,11 +39,16 @@ namespace BlackJackView
 
             for (int i = 0; i < names.Count; i++)
             {
+                if (string.IsNullOrWhiteSpace(names[i]))
+                {
+                    names[i] = $"Player {i + 1}";
+                }
+
                 Human player = new Human()
                 {
                     Name = names[i],
-                    Bank = 20,
-                    Bet = 1,
+                    Bank = 1000,
+                    Bet = 20,
                     CardsInHand = new List<Card>(),
                 };
 
@@ -54,10 +59,7 @@ namespace BlackJackView
             {
                 jack.Players.Add(new House());
             }
-
-
-
-            jack.StartNewTurn(20);
+            jack.StartNewTurn();
         }
 
         private void PopulatePlayerGrid()
@@ -100,10 +102,7 @@ namespace BlackJackView
             ugridPlayers.Rows = 3;
             PopulatePlayerGrid();
             lblTurnIndicator.Content = $"{jack.Players[0].Name}'s turn!";
-            foreach (var card in jack.Players[0].CardsInHand)
-            {
-                pnlCardDisply.Children.Add(new Image { Source = new BitmapImage(new Uri(card.ImageSource)) });
-            }
+            DrawHand();
         }
 
         private void btnHit_Click(object sender, RoutedEventArgs e)
@@ -127,14 +126,11 @@ namespace BlackJackView
             }
             else
             {
+                UpdateViews();
                 btnHit.IsEnabled = false;
                 btnHit.Content = (currentPlayer.HasBust) ? "Busted!" : "Can't draw any more";
             }
-            pnlCardDisply.Children.RemoveRange(0, pnlCardDisply.Children.Count);
-            foreach (var card in jack.Players[sequence].CardsInHand)
-            {
-                pnlCardDisply.Children.Add(new Image { Source = new BitmapImage(new Uri(card.ImageSource)) });
-            }
+            DrawHand();
             UpdateViews();
         }
 
@@ -148,68 +144,64 @@ namespace BlackJackView
             btnHit.IsEnabled = true;
             btnHit.Content = "Hit";
 
-            pnlCardDisply.Children.RemoveRange(0, pnlCardDisply.Children.Count);
-            foreach (var card in jack.Players[sequence].CardsInHand)
-            {
-                pnlCardDisply.Children.Add(new Image { Source = new BitmapImage(new Uri(card.ImageSource)) });
-            }
             sequence++;
-            if (sequence >= jack.Players.Count)
+            if (sequence >= jack.Players.Count - 1)
             {
+                currentPlayer = jack.Players[sequence];
+                if (currentPlayer.GetType() == typeof(House))
+                {
+                    while (currentPlayer.GetHandValue() < 17)
+                    {
+                        currentPlayer.CardsInHand.Add(jack.GameDeck.DrawCard());
+                    }
+                }
                 EndRound();
                 sequence = 0;
-                foreach (var player in jack.Players)
-                {
-                    player.HasBust = false;
-                }
-                jack.Deck = new Deck("Blackjack");
+                jack.GameDeck = new Deck("Blackjack");
             }
 
-            pnlCardDisply.Children.RemoveRange(0, pnlCardDisply.Children.Count);
-            foreach (var card in jack.Players[sequence].CardsInHand)
-            {
-                pnlCardDisply.Children.Add(new Image { Source = new BitmapImage(new Uri(card.ImageSource)) });
-            }
             currentPlayer = jack.Players[sequence];
+            DrawHand();
             lblTurnIndicator.Content = $"{jack.Players[sequence].Name}'s turn!";
 
             btnBet1.IsEnabled = true;
-            btnBet1.Content = "Bet $1";
+            btnBet1.Content = "Bet $20";
             btnBet5.IsEnabled = true;
-            btnBet5.Content = "Bet $5";
+            btnBet5.Content = "Bet $50";
             btnBet10.IsEnabled = true;
-            btnBet10.Content = "Bet $10";
+            btnBet10.Content = "Bet $100";
         }
 
         private void EndRound()
         {
-            int winningAmount = jack.TakeHouseTurn();
-            jack.GetWinners(winningAmount);
-            foreach (var player in jack.Players)
-            {
-                player.CardsInHand = new List<Card>();
-            }
+            jack.GetWinners();
             ShowHouseHand();
             StartRound();
             UpdateViews();
+            DrawHand();
         }
 
         private void ShowHouseHand()
         {
             lblTurnIndicator.Content = "House's turn";
 
+            DrawHand();
+            MessageBox.Show($"The house got {currentPlayer.GetHandValue()}");
+        }
+
+        private void DrawHand()
+        {
             pnlCardDisply.Children.RemoveRange(0, pnlCardDisply.Children.Count);
-            foreach (var card in jack.House.CardsInHand)
+            foreach (var card in currentPlayer.CardsInHand)
             {
-                pnlCardDisply.Children.Add(new Image { Source = new BitmapImage(new Uri(card.ImageSource)) });
-            }
-            if (jack.House.HandValue == 0)
-            {
-                MessageBox.Show("The house busted");
-            }
-            else
-            {
-                MessageBox.Show($"The house got {jack.House.HandValue}");
+                Image image = new Image()
+                {
+                    Source = new BitmapImage(new Uri(card.ImageSource)),
+                    MaxHeight = 200,
+                    MaxWidth = 100
+                    
+                };
+                pnlCardDisply.Children.Add(image);
             }
         }
 
@@ -218,7 +210,7 @@ namespace BlackJackView
             List<int> playersToRemove = new List<int>();
             foreach (var player in jack.Players)
             {
-                if (player.Bank <= -50)
+                if (player.Bank <= 0)
                 {
                     playersToRemove.Add(jack.Players.IndexOf(player));
                 }
@@ -227,7 +219,7 @@ namespace BlackJackView
             {
                 jack.Players.RemoveAt(i);
             }
-            jack.StartNewTurn(20);
+            jack.StartNewTurn();
         }
 
         private void UpdateViews()
@@ -242,19 +234,19 @@ namespace BlackJackView
 
         private void btnBet1_Click(object sender, RoutedEventArgs e)
         {
-            currentPlayer.Bet = 1;
+            currentPlayer.Bet = 20;
             UpdateViews();
         }
 
         private void btnBet5_Click(object sender, RoutedEventArgs e)
         {
-            currentPlayer.Bet = 5;
+            currentPlayer.Bet = 50;
             UpdateViews();
         }
 
         private void btnBet10_Click(object sender, RoutedEventArgs e)
         {
-            currentPlayer.Bet = 10;
+            currentPlayer.Bet = 100;
             UpdateViews();
         }
     }

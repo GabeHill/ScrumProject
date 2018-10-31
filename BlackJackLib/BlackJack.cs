@@ -9,10 +9,7 @@ namespace BlackJackLib
 {
     public class BlackJack : Game
     {
-        public Deck Deck { get; set; }
         public int Pool { get; set; }
-
-        public Player House { get; set; }
 
         public BlackJack()
         {
@@ -21,26 +18,25 @@ namespace BlackJackLib
         }
 
         //Gets All the players that have no busted
-        public void GetWinners(int winningAmount)
+        public void GetWinners()
         {
             List<Player> contenders = new List<Player>();
 
             foreach (var player in Players)
             {
+                player.Bank -= player.Bet;
                 if (!player.HasBust)
                 {
                     contenders.Add(player);
                 }
-                else
-                {
-                    player.Bank -= player.Bet;
-                }
             }
+
+            int winningAmount = GetHighestHigh(contenders);
             foreach (var player in contenders)
             {
-                if (player.HandValue > winningAmount)
+                if (player.GetHandValue() == winningAmount)
                 {
-                    if (player.HandValue == 21)
+                    if (player.GetHandValue() == 21)
                     {
                         player.Bank += player.Bet * 3;
                     }
@@ -53,14 +49,6 @@ namespace BlackJackLib
                         player.Bank += player.Bet * 2;
                     }
 
-                }
-                else if (player.HandValue == winningAmount)
-                {
-                    //Do nothing
-                }
-                else
-                {
-                    player.Bank -= player.Bet;
                 }
             }
 
@@ -76,12 +64,21 @@ namespace BlackJackLib
 
         private void Remove(int highestHigh, List<Player> players)
         {
-            foreach (var player in players)
+            bool isRemoving = true;
+            while (isRemoving)
             {
-                if (player.GetHandValue() < highestHigh)
+                int total = players.Count;
+                foreach (var player in players)
                 {
-                    players.Remove(player);
-                    break;
+                    if (player.GetHandValue() < highestHigh)
+                    {
+                        players.Remove(player);
+                        break;
+                    }
+                }
+                if (total == players.Count)
+                {
+                    isRemoving = false;
                 }
             }
         }
@@ -114,16 +111,12 @@ namespace BlackJackLib
         }
 
         //Players Place Bet and receive new cards
-        public void StartNewTurn(int bet)
+        public void StartNewTurn()
         {
             foreach (var player in Players)
             {
                 player.CardsInHand = (GameDeck.DealCards(2));
             }
-        }
-        public void PlaceBet(Player player, int bet)
-        {
-            player.PlaceBet(bet);
         }
 
         //Does a player have less than five Cards in Hand
@@ -137,23 +130,6 @@ namespace BlackJackLib
             {
                 return false;
             }
-        }
-
-        public int TakeHouseTurn()
-        {
-            int houseHandValue = 0;
-            House = new Player();
-            House.CardsInHand = new List<Card>();
-            while (houseHandValue < 17)
-            {
-                House.CardsInHand.Add(Deck.DrawCard());
-                houseHandValue = House.GetHandValue();
-            }
-            if (houseHandValue > 21)
-            {
-                houseHandValue = 0;
-            }
-            return houseHandValue;
         }
     }
 }

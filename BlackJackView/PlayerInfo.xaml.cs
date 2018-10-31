@@ -41,8 +41,8 @@ namespace BlackJackView
                 Image image = new Image();
                 image.Source = new BitmapImage(new Uri("pack://application:,,,/CardGameFrameworkLibrary;component/Resource/CARDBACK.png"));
                 image.IsMouseDirectlyOverChanged += ImageMouseOverChanged;
-                image.MaxHeight = 40.0;
-                image.MaxWidth = 40.0;
+                image.MaxHeight = 50;
+                image.MaxWidth = 50;
                 pnlCards.Children.Add(image);
             }
         }

@@ -122,12 +122,11 @@ namespace PokerView
                 EndGame();
             }
 
-            if (FoldCount == poker.Players.Count)
+            if (CurrentPlayer.HasFolded && FoldCount == poker.Players.Count)
             {
-                throw new Exception("All players have folded and this needs to be handled");
+                EndGame();
             }
-
-            if (CurrentPlayer.HasFolded)
+            else if (CurrentPlayer.HasFolded && FoldCount != poker.Players.Count)
             {
                 NextPlayer();
             }
@@ -240,11 +239,11 @@ namespace PokerView
 
         private void Fold(object sender, RoutedEventArgs e)
         {
+            FoldCount++;
             CurrentPlayer.Bet = 0;
             CurrentPlayer.HandValue = 0;
             CurrentPlayer.HasFolded = true;
             NextPlayer();
-            FoldCount++;
         }
 
         private void PlaceBet(object sender, RoutedEventArgs e)

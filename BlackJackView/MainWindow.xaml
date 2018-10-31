@@ -23,9 +23,9 @@
 
         <Button Name="btnHit" Content="Hit" Click="btnHit_Click" Grid.Column="1" Grid.Row="2"/>
         <Button Name="btnPass" Content="Pass"  Click="btnPass_Click" Grid.Column="2" Grid.Row="2"/>
-        <Button Name="btnBet1" Content="Bet $1"  Click="btnBet1_Click"  Grid.Column="3" Grid.Row="2"/>
-        <Button Name="btnBet5" Content="Bet $5"  Click="btnBet5_Click"  Grid.Column="4" Grid.Row="2"/>
-        <Button Name="btnBet10" Content="Bet $10"  Click="btnBet10_Click"  Grid.Column="5" Grid.Row="2"/>
+        <Button Name="btnBet1" Content="Bet $20"  Click="btnBet1_Click"  Grid.Column="3" Grid.Row="2"/>
+        <Button Name="btnBet5" Content="Bet $50"  Click="btnBet5_Click"  Grid.Column="4" Grid.Row="2"/>
+        <Button Name="btnBet10" Content="Bet $100"  Click="btnBet10_Click"  Grid.Column="5" Grid.Row="2"/>
         <UniformGrid Name="ugridPlayers" Grid.RowSpan="3"/>
         <StackPanel Name="pnlCardDisply" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Orientation="Horizontal"/>
         <Label Name="lblTurnIndicator" Content="Label" Grid.Column="1" Grid.ColumnSpan="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40"/>

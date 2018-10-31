@@ -11,7 +11,8 @@ namespace CardGameFrameworkLibrary.Models
         public House()
         {
             Name = "CPU";
-            Bank = 5000;
+            Bank = 2000;
+            Bet = 50;
         }
         public bool HasToDraw()
         {

@@ -52,7 +52,7 @@ namespace CardGameFrameworkLibrary.Models
         public string Name { get; set; }
         public List<Card> CardsInHand { get; set; }
         public bool HasFolded { get; set; }
-        public bool HasBust { get; set; }
+        public bool HasBust { get { return Bust(); } }
         public int HandValue { get; set; }
 
         private bool Bust()
@@ -80,27 +80,12 @@ namespace CardGameFrameworkLibrary.Models
         public int GetHandValue()
         {
             HandValue = 0;
-            int numOfAces = 0;
             foreach (var card in CardsInHand)
             {
                 HandValue += card.Value;
-                if (card.Rank == Rank.ACE)
+                if (HandValue > 21 && card.Rank == Rank.ACE)
                 {
-                    numOfAces++;
-                }
-            }
-            if (HandValue > 21)
-            {
-                for (int i = 0; i < numOfAces; i++)
-                {
-                    if (HandValue > 21)
-                    {
-                        HandValue = HandValue - 10;
-                    }
-                }
-                if (HandValue > 21)
-                {
-                    HasBust = true;
+                    HandValue -= 10;
                 }
             }
             return HandValue;
