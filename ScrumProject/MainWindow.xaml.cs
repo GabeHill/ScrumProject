@@ -69,7 +69,7 @@ namespace ScrumProject
                         var name = (TextBox)nameHolder.Children[1];
                         blackjackNames.Add(name.Text);
                     }
-                    BlackJackView.MainWindow blackjackWindow = new BlackJackView.MainWindow(blackjackNames, (bool)blackjackSettings.cbxWithHouse.IsChecked);
+                    BlackJackView.MainWindow blackjackWindow = new BlackJackView.MainWindow(blackjackNames, true);
                     blackjackWindow.Show();
                     Close();
                     break;

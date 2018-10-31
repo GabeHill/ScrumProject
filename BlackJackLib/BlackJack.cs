@@ -7,8 +7,13 @@ using CardGameFrameworkLibrary.Models;
 
 namespace BlackJackLib
 {
-    public class BlackJack: Game
+    public class BlackJack : Game
     {
+        public Deck Deck { get; set; }
+        public int Pool { get; set; }
+
+        public Player House { get; set; }
+
         public BlackJack()
         {
             Players = new List<Player>();
@@ -16,7 +21,7 @@ namespace BlackJackLib
         }
 
         //Gets All the players that have no busted
-        public void GetWinners()
+        public void GetWinners(int winningAmount)
         {
             List<Player> contenders = new List<Player>();
 
@@ -26,9 +31,41 @@ namespace BlackJackLib
                 {
                     contenders.Add(player);
                 }
+                else
+                {
+                    player.Bank -= player.Bet;
+                }
             }
-            CheckHighest(contenders);
-            EndTurn(contenders);
+            foreach (var player in contenders)
+            {
+                if (player.HandValue > winningAmount)
+                {
+                    if (player.HandValue == 21)
+                    {
+                        player.Bank += player.Bet * 3;
+                    }
+                    else if (player.CardsInHand.Count == 5)
+                    {
+                        player.Bank += player.Bet * 5;
+                    }
+                    else
+                    {
+                        player.Bank += player.Bet * 2;
+                    }
+
+                }
+                else if (player.HandValue == winningAmount)
+                {
+                    //Do nothing
+                }
+                else
+                {
+                    player.Bank -= player.Bet;
+                }
+            }
+
+            //CheckHighest(contenders);
+            //EndTurn(contenders);
         }
         //Grabs the highest hand value of all players
         private void CheckHighest(List<Player> players)
@@ -84,7 +121,7 @@ namespace BlackJackLib
                 player.CardsInHand = (GameDeck.DealCards(2));
             }
         }
-        public void PlaceBet(Player player,int bet)
+        public void PlaceBet(Player player, int bet)
         {
             player.PlaceBet(bet);
         }
@@ -100,6 +137,23 @@ namespace BlackJackLib
             {
                 return false;
             }
+        }
+
+        public int TakeHouseTurn()
+        {
+            int houseHandValue = 0;
+            House = new Player();
+            House.CardsInHand = new List<Card>();
+            while (houseHandValue < 17)
+            {
+                House.CardsInHand.Add(Deck.DrawCard());
+                houseHandValue = House.GetHandValue();
+            }
+            if (houseHandValue > 21)
+            {
+                houseHandValue = 0;
+            }
+            return houseHandValue;
         }
     }
 }

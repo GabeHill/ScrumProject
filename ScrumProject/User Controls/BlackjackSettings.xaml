@@ -16,7 +16,6 @@
             <RowDefinition Height="307*"/>
         </Grid.RowDefinitions>
         <ComboBox Name="cmbxPlayerCount" Margin="10,10,10,9.8" SelectionChanged="cmbxPlayerCount_SelectionChanged"/>
-        <CheckBox Name="cbxWithHouse" Content="Play with house?" Grid.Column="1" Height="29" Width="144" Checked="cbxWithHouse_CheckChanged" Unchecked="cbxWithHouse_CheckChanged"/>
         <UniformGrid Name="ugridPlayerNames" Grid.Row="1" Grid.ColumnSpan="2">
 
         </UniformGrid>
